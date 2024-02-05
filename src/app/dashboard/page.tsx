@@ -1,30 +1,28 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
-import RepoCard from '@/components/RepoCard';
-import Guide from '@/components/Guide';
-import getRepos from '@/utils/getRepos';
-import getInstallationIds from '@/utils/getInstallationIds';
-import { getLimit } from '@/utils/getLimit';
+import LoginButton from '@/components/LoginButton'
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { cookies } from 'next/headers'
 
-export default async function Dashboard() {
-  const installationIds = await getInstallationIds();
-  const repos = await getRepos(installationIds);
-  const limit = await getLimit(installationIds[0]);
-  const isValidInstallation = repos.length > 0 && repos.length <= limit;
+export const metadata: Metadata = {
+    title: 'BlogHub',
+}
 
-  return (
-    <div className="flex w-full justify-center px-5 py-5 sm:py-10 md:px-10 lg:px-20 ">
-      {isValidInstallation ? (
-        <div className="grid w-full gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {repos
-            .sort((a, b) => b.stargazers_count - a.stargazers_count)
-            .map((repo: any) => (
-              <RepoCard repo={repo} key={repo.id} />
-            ))}
+export default function DashboadPage() {
+    console.log('hi')
+    console.log('hi', cookies().get('access_token')?.value)
+    return (
+        <div className="flex min-h-screen">
+            <div className="w-full bg-white ">
+                <Link
+                    href="https://repohistory.com"
+                    className="ml-auto mt-10 flex items-center gap-3 pl-10 text-2xl
+            font-bold leading-tight text-black "
+                >
+                    BlogHub
+                </Link>
+                <h1 className="pt-36 text-center text-4xl font-bold leading-tight text-black">Log in</h1>
+            </div>
         </div>
-      ) : (
-        <Guide repos={repos} limit={limit} />
-      )}
-    </div>
-  );
+    )
 }

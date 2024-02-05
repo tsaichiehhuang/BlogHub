@@ -36,7 +36,7 @@ export default function LoginButton() {
         <Button
             // spinner={<Spinner />}
             isLoading={isLoading}
-            className="mt-10 bg-[#222223] font-semibold text-white p-5"
+            className="m-4 bg-[#222223] font-semibold text-white p-5"
             radius="full"
             size="lg"
             as={Link}
