@@ -1,11 +1,14 @@
-'use client'
-
 import Link from 'next/link'
 import React, { useState, useEffect, useContext } from 'react'
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from '@nextui-org/react'
 import LoginButton from './LoginButton'
 import { useRouter } from 'next/navigation'
+import { cookies } from 'next/headers'
 
+let isLogin: boolean
+if (cookies().get('access_token')) {
+    isLogin = true
+}
 export default function Header() {
     return (
         <>
@@ -13,9 +16,7 @@ export default function Header() {
                 <NavbarContent justify="start"></NavbarContent>
                 <NavbarContent justify="center"></NavbarContent>
                 <NavbarContent justify="end" className="text-right">
-                    <NavbarItem className=" text-right">
-                        <LoginButton />
-                    </NavbarItem>
+                    <NavbarItem className=" text-right">{isLogin ? '嗨,丹尼爾' : <LoginButton />}</NavbarItem>
                 </NavbarContent>
             </Navbar>
 

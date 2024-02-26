@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import React, { useState, useEffect, useContext } from 'react'
 import { Card, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@nextui-org/react'
@@ -5,6 +6,41 @@ import { Card, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@n
 import { useRouter } from 'next/navigation'
 
 export default function ArticleDisplay() {
+    let issues: any
+    useEffect(() => {
+        const owner = 'tsaichiehhuang'
+        const repo = 'tsaichiehhuang'
+
+        const fetchIssues = async () => {
+            try {
+                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                    method: 'GET',
+                })
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch issues')
+                }
+
+                const issues = await response.json()
+
+                issues.forEach((issue: any) => {
+                    const title = issue.title // 獲取 issue 的 title
+                    const body = issue.body // 獲取 issue 的 body
+
+                    console.log('Title:', title)
+                    console.log('Body:', body)
+                })
+            } catch (error) {
+                console.error('Error fetching issues:', error)
+            }
+        }
+
+        fetchIssues()
+    }, [])
+
     return (
         <Card isPressable shadow="sm" className="max-w-[700px] gap-4  p-4 pl-8 text-left border-b border-black">
             <CardHeader className="">
