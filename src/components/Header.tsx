@@ -4,12 +4,12 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from '@nextui-
 import LoginButton from './LoginButton'
 import { useRouter } from 'next/navigation'
 import { cookies } from 'next/headers'
+import IsLogin from '@/components/IsLogin'
+import Logo from './Logo'
 
-let isLogin: boolean
-if (cookies().get('access_token')) {
-    isLogin = true
-}
 export default function Header() {
+    const isLogin = IsLogin()
+
     return (
         <>
             <Navbar>
@@ -21,7 +21,10 @@ export default function Header() {
             </Navbar>
 
             <div className="grid grid-cols-12 grid-rows-3 col-span-12 w-full h-[204px] border-t-2 border-b-2 border-black font-['Pattaya'] text-center text-black text-[64px] ">
-                <div className="row-start-2 col-span-12">Daniel’s Blog</div>
+                {/* <div onClick={handleClick} className="row-start-2 col-span-12">
+                    Daniel’s Blog
+                </div> */}
+                <Logo />
             </div>
         </>
     )

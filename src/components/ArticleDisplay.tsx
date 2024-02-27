@@ -2,33 +2,14 @@
 
 import React, { useState, useEffect, useContext } from 'react'
 import ArticleDisplayLayout from './ArticleDisplayLayout'
+import useGetIssues from '@/hooks/useGetIssues'
 
 export default function ArticleDisplay() {
-    const [issues, setIssues] = useState([])
+    const { getIssues, issues } = useGetIssues()
+
     useEffect(() => {
-        const owner = 'tsaichiehhuang'
-        const repo = 'tsaichiehhuang'
-
-        const fetchIssues = async () => {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
-                    headers: {
-                        Accept: 'application/json',
-                    },
-                    method: 'GET',
-                })
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch issues')
-                }
-
-                setIssues(await response.json())
-            } catch (error) {
-                console.error('Error fetching issues:', error)
-            }
-        }
-
-        fetchIssues()
+        getIssues()
     }, [])
+
     return issues.map((issue: any, index: number) => <ArticleDisplayLayout issue={issue} key={index} />)
 }
