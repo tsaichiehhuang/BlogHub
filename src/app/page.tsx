@@ -19,8 +19,6 @@ export default function Home() {
                     </div>
                     <div className="flex-col grid gap-4 col-span-6 col-start-6 ">
                         <ArticleDisplay />
-                        <ArticleDisplay />
-                        <ArticleDisplay />
                     </div>
                 </div>
             </div>
