@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 export default function ArticleDisplayLayout(issue: any) {
     const router = useRouter()
     const handleClick = () => {
-        router.push(`posts/${issue.issue.number}`)
+        router.push(`article/${issue.issue.number}`)
     }
     const createdAtDate = new Date(issue.issue.created_at)
     const formattedCreatedAt = createdAtDate ? createdAtDate.toLocaleString() : ''

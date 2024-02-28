@@ -2,28 +2,38 @@ import Cookies from 'js-cookie'
 import { useState, useEffect } from 'react'
 
 function useGetIssues() {
-    const accessToken = Cookies.get('accessToken')
     const [issues, setIssues] = useState([])
+    const perPage = 10
+    const [hasMoreIssues, setHasMoreIssues] = useState(true)
     const owner = 'tsaichiehhuang'
-    const repo = 'tsaichiehhuang'
-    const getIssues = async () => {
+    const repo = 'TestBlog'
+    const getIssues = async (page: number) => {
         try {
-            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
-                headers: {
-                    Accept: 'application/json',
-                },
-                method: 'GET',
-            })
+            const response = await fetch(
+                `https://api.github.com/repos/${owner}/${repo}/issues?page=${page}&per_page=${perPage}`,
+                {
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                    method: 'GET',
+                }
+            )
             if (!response.ok) {
                 throw new Error('Failed to fetch issues')
             }
 
-            setIssues(await response.json())
+            const newIssues = await response.json()
+
+            setIssues((prevIssues) => [...prevIssues, ...newIssues])
+            if (newIssues.length < perPage) {
+                setHasMoreIssues(false)
+            }
         } catch (error) {
             console.error('Error fetching class data:', error)
         }
     }
-    return { getIssues, issues }
+
+    return { getIssues, issues, hasMoreIssues }
 }
 
 export default useGetIssues

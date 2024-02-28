@@ -36,9 +36,9 @@ export default function Page({}) {
                 <Chip
                     className="bg-zinc-300 text-tiny p-1 flex-item text-center rounded-sm"
                     size="sm"
-                    style={{ width: `${(targetIssue && targetIssue.labels[0].name.length) * 16}px` }}
+                    // style={{ width: `${(targetIssue && targetIssue.labels[0].name.length) * 16}px` }}
                 >
-                    {targetIssue && targetIssue.labels[0].name}
+                    {/* {targetIssue && targetIssue.labels[0]?.name} */}
                 </Chip>
             </CardHeader>
             <div className="  text-black text-[32px] font-bold">{targetIssue && targetIssue.title}</div>
