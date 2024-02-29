@@ -5,19 +5,31 @@ import { Card, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@n
 import { remark } from 'remark'
 import html from 'remark-html'
 import EditArticle from '@/components/EditArticle'
+import Cookies from 'js-cookie'
 
 export default function Article(isLoign: boolean) {
     const path = window.location.pathname
     const parts = path.split('/')
     const number = parseInt(parts[parts.length - 1])
-
-    const { getIssues, issues } = useGetIssues()
-
+    const [issue, setIssue] = useState({} as any)
+    const token = Cookies.get('access_token')
+    const owner = 'tsaichiehhuang'
+    const repo = 'TestBlog'
+    const getAnIssues = async () => {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
+            headers: {
+                Accept: 'application/vnd.github+json',
+                Authorization: `Bearer ${token}`,
+            },
+            method: 'GET',
+        })
+        setIssue(await res.json())
+    }
     useEffect(() => {
-        getIssues()
+        getAnIssues()
     }, [])
-    const targetIssue = issues.find((issue: any) => issue.number === number)
-    const createdAtDate = targetIssue ? new Date(targetIssue.created_at) : null
+
+    const createdAtDate = issue ? new Date(issue.created_at) : null
 
     const formattedCreatedAt = createdAtDate ? createdAtDate.toLocaleString() : ''
     const formatMarkdown = (markdownContent) => {
@@ -33,20 +45,19 @@ export default function Article(isLoign: boolean) {
                 >
                     發布時間：{formattedCreatedAt}
                     <Chip className="bg-zinc-100 text-tiny p-1 flex-item text-center" size="sm">
-                        {targetIssue && targetIssue.labels && targetIssue.labels[0]?.name}
+                        {issue && issue.labels && issue.labels[0]?.name}
                     </Chip>
                 </div>
 
-                {isLoign && targetIssue !== undefined && <EditArticle targetIssue={targetIssue} />}
+                {isLoign && <EditArticle issue={issue} number={number} />}
             </CardHeader>
 
-            <div className="  text-black text-[32px] font-bold">{targetIssue && targetIssue.title}</div>
+            <div className="  text-black text-[32px] font-bold">{issue && issue.title}</div>
             <CardBody className="">
                 <div className="text-zinc-700 text-xl font-medium justify-self-start">
-                    {/* {targetIssue && formatMarkdown(targetIssue.body)} */}
                     <div
                         className="leading-loose"
-                        dangerouslySetInnerHTML={{ __html: targetIssue && formatMarkdown(targetIssue.body) }}
+                        dangerouslySetInnerHTML={{ __html: issue && formatMarkdown(issue.body) }}
                     ></div>
                 </div>
             </CardBody>

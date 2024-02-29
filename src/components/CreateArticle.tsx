@@ -11,13 +11,10 @@ import {
     Textarea,
     Input,
 } from '@nextui-org/react'
-
 import { Octokit } from '@octokit/rest'
-
 import Cookies from 'js-cookie'
 
 export default function CreateArticle() {
-    const [isData, setIsData] = useState(false)
     const token = Cookies.get('access_token')
     const octokit = new Octokit({
         auth: `${token}`,
