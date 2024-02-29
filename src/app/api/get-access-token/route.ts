@@ -8,6 +8,7 @@ export async function POST(request: Request) {
             code,
             client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
             client_secret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+            scope: 'repo,issues:write',
         })}`,
         {
             headers: {

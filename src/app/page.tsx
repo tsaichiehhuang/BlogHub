@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import ArticleDisplay from '@/components/ArticleDisplay'
 import AboutMe from '@/components/AboutMe'
+import AddArticle from '@/components/CreateArticle'
+import IsLogin from '@/components/IsLogin'
 
 export const metadata: Metadata = {
     title: 'BlogHub',
@@ -18,6 +20,8 @@ export default function Home() {
                         <AboutMe />
                     </div>
                     <div className="flex-col grid gap-4 col-span-6 col-start-6 ">
+                        {IsLogin() && <AddArticle />}
+
                         <ArticleDisplay />
                     </div>
                 </div>
