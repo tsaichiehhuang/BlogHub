@@ -7,7 +7,8 @@ import html from 'remark-html'
 import EditArticle from '@/components/EditArticle'
 import Cookies from 'js-cookie'
 
-export default function Article(isLoign: boolean) {
+export default function Article(props) {
+    const { isLogin } = props
     const path = window.location.pathname
     const parts = path.split('/')
     const number = parseInt(parts[parts.length - 1])
@@ -19,7 +20,7 @@ export default function Article(isLoign: boolean) {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {
                 Accept: 'application/vnd.github+json',
-                Authorization: `Bearer ${token}`,
+                // Authorization: `Bearer ${token}`,
             },
             method: 'GET',
         })
@@ -49,7 +50,7 @@ export default function Article(isLoign: boolean) {
                     </Chip>
                 </div>
 
-                {isLoign && <EditArticle issue={issue} number={number} />}
+                {isLogin && <EditArticle issue={issue} number={number} />}
             </CardHeader>
 
             <div className="  text-black text-[32px] font-bold">{issue && issue.title}</div>

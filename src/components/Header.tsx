@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { cookies } from 'next/headers'
 import IsLogin from '@/components/IsLogin'
 import Logo from './Logo'
+import LogoutButton from '@/components/LogoutButton'
 
 export default function Header() {
     const isLogin = IsLogin()
@@ -16,7 +17,14 @@ export default function Header() {
                 <NavbarContent justify="start"></NavbarContent>
                 <NavbarContent justify="center"></NavbarContent>
                 <NavbarContent justify="end" className="text-right">
-                    <NavbarItem className=" text-right">{isLogin ? '嗨,丹尼爾' : <LoginButton />}</NavbarItem>
+                    <NavbarItem className=" text-right">
+                        {isLogin ? <div className="font-bold text-lg">嗨,丹尼爾</div> : <LoginButton />}
+                    </NavbarItem>
+                    {isLogin && (
+                        <NavbarItem className=" text-right">
+                            <LogoutButton />
+                        </NavbarItem>
+                    )}
                 </NavbarContent>
             </Navbar>
 
