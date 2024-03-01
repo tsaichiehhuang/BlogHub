@@ -52,10 +52,10 @@ export default function Article(props) {
                 </div>
 
                 {isLogin && (
-                    <>
+                    <div className="gap-2 flex">
                         <EditArticle issue={issue} number={number} />
                         <DeleteArticle issue={issue} number={number} />
-                    </>
+                    </div>
                 )}
             </CardHeader>
 

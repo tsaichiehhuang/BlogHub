@@ -57,7 +57,7 @@ export default function DeleteArticle(props) {
             <Button color="default" onClick={handleClick}>
                 刪除文章
             </Button>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="lg">
                 <ModalContent>
                     {(onClose) => (
                         <>
