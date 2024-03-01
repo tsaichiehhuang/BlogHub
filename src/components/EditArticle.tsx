@@ -12,8 +12,8 @@ import {
     Textarea,
     Input,
 } from '@nextui-org/react'
-import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
+import * as Yup from 'yup'
 
 export default function EditArticle(props) {
     const { issue, number } = props
@@ -21,10 +21,8 @@ export default function EditArticle(props) {
     const token = Cookies.get('access_token')
     const [body, setBody] = useState(issue.body)
     const [title, setTitle] = useState(issue.title)
-    // if (issue.body === undefined) {
-    //     setBody(issue.body)
-    //     setTitle(issue.title)
-    // }
+    const [validationError, setValidationError] = useState(null)
+
     const handleClick = () => {
         onOpen()
         setBody(issue.body)
@@ -37,6 +35,12 @@ export default function EditArticle(props) {
         setTitle(e.target.value)
     }
     const handleEditIssue = async () => {
+        const validationSchema = Yup.object().shape({
+            title: Yup.string().required('標題為必填'),
+            body: Yup.string().min(30, '內容至少要30個字').required('文章內容為必填'),
+        })
+
+        await validationSchema.validate({ title, body }, { abortEarly: false })
         const owner = 'tsaichiehhuang'
         const repo = 'TestBlog'
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
@@ -53,6 +57,29 @@ export default function EditArticle(props) {
             }, 1000)
         }
     }
+    useEffect(() => {
+        const validateTitle = async () => {
+            try {
+                await Yup.string().required('標題為必填').validate(title)
+                setValidationError((prevErrors) => ({ ...prevErrors, title: '' }))
+            } catch (error) {
+                setValidationError((prevErrors) => ({ ...prevErrors, title: error.message }))
+            }
+        }
+        validateTitle()
+    }, [title])
+
+    useEffect(() => {
+        const validateBody = async () => {
+            try {
+                await Yup.string().min(30, '內容至少要30個字').required('文章內容為必填').validate(body)
+                setValidationError((prevErrors) => ({ ...prevErrors, body: '' }))
+            } catch (error) {
+                setValidationError((prevErrors) => ({ ...prevErrors, body: error.message }))
+            }
+        }
+        validateBody()
+    }, [body])
     return (
         <>
             <Button color="primary" onClick={handleClick}>
@@ -72,6 +99,7 @@ export default function EditArticle(props) {
                                     placeholder={issue && issue.title}
                                     value={title}
                                     onChange={handleTitleChange}
+                                    errorMessage={validationError ? validationError.title : ' '}
                                 />
                                 <Textarea
                                     label="文章內容"
@@ -79,6 +107,7 @@ export default function EditArticle(props) {
                                     placeholder={issue && issue.body}
                                     value={body}
                                     onChange={handleBodyChange}
+                                    errorMessage={validationError ? validationError.body : ' '}
                                 />
                             </ModalBody>
                             <ModalFooter>

@@ -102,7 +102,6 @@ export default function CreateArticle() {
                         label="新增文章"
                         labelPlacement="outside"
                         placeholder="想發表什麼內容呢？"
-                        // value={title}
                         onChange={handleTitleChange}
                         className="  text-black text-[28px] font-bold"
                         size="lg"
