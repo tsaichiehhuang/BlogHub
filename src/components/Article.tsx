@@ -5,6 +5,7 @@ import { Card, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@n
 import { remark } from 'remark'
 import html from 'remark-html'
 import EditArticle from '@/components/EditArticle'
+import DeleteArticle from '@/components/DeleteArticle'
 import Cookies from 'js-cookie'
 
 export default function Article(props) {
@@ -50,7 +51,12 @@ export default function Article(props) {
                     </Chip>
                 </div>
 
-                {isLogin && <EditArticle issue={issue} number={number} />}
+                {isLogin && (
+                    <>
+                        <EditArticle issue={issue} number={number} />
+                        <DeleteArticle issue={issue} number={number} />
+                    </>
+                )}
             </CardHeader>
 
             <div className="  text-black text-[32px] font-bold">{issue && issue.title}</div>
