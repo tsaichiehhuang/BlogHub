@@ -10,6 +10,10 @@ import {
     useDisclosure,
     Textarea,
     Input,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
 } from '@nextui-org/react'
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
@@ -65,12 +69,46 @@ export default function CreateArticle() {
             }
         }
     }
+    useEffect(() => {
+        const validateTitle = async () => {
+            try {
+                await Yup.string().required('標題為必填').validate(title)
+                setValidationError((prevErrors) => ({ ...prevErrors, title: '' }))
+            } catch (error) {
+                setValidationError((prevErrors) => ({ ...prevErrors, title: error.message }))
+            }
+        }
+        validateTitle()
+    }, [title])
+
+    useEffect(() => {
+        const validateBody = async () => {
+            try {
+                await Yup.string().min(30, '內容至少要30個字').required('文章內容為必填').validate(body)
+                setValidationError((prevErrors) => ({ ...prevErrors, body: '' }))
+            } catch (error) {
+                setValidationError((prevErrors) => ({ ...prevErrors, body: error.message }))
+            }
+        }
+        validateBody()
+    }, [body])
 
     return (
         <>
-            <Button color="primary" onClick={onOpen}>
-                新增文章
-            </Button>
+            <Card onClick={onOpen} isPressable shadow="sm" className=" gap-4  p-4 pl-8 text-left ">
+                <CardBody className="">
+                    <Input
+                        key="outside"
+                        label="新增文章"
+                        labelPlacement="outside"
+                        placeholder="想發表什麼內容呢？"
+                        // value={title}
+                        onChange={handleTitleChange}
+                        className="  text-black text-[28px] font-bold"
+                        size="lg"
+                    />
+                </CardBody>
+            </Card>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
@@ -80,18 +118,13 @@ export default function CreateArticle() {
                                 <>
                                     <Input
                                         key="outside"
-                                        type="email"
                                         label="標題"
                                         labelPlacement="outside"
                                         placeholder="輸入標題"
                                         value={title}
                                         onChange={handleTitleChange}
+                                        errorMessage={validationError ? validationError.title : ' '}
                                     />
-                                    {validationError ? (
-                                        <div className="text-red-500">{validationError.title}</div>
-                                    ) : (
-                                        <div className="w-4 h-6 "></div>
-                                    )}
                                 </>
                                 <>
                                     <Textarea
@@ -100,12 +133,8 @@ export default function CreateArticle() {
                                         placeholder="輸入內文"
                                         value={body}
                                         onChange={handleBodyChange}
+                                        errorMessage={validationError ? validationError.body : ' '}
                                     />
-                                    {validationError ? (
-                                        <div className="text-red-500">{validationError.body}</div>
-                                    ) : (
-                                        <div className="w-4 h-6"></div>
-                                    )}{' '}
                                 </>
                             </ModalBody>
                             <ModalFooter>

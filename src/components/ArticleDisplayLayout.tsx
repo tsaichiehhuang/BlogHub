@@ -12,12 +12,7 @@ export default function ArticleDisplayLayout(issue: any) {
     const createdAtDate = new Date(issue.issue.created_at)
     const formattedCreatedAt = createdAtDate ? createdAtDate.toLocaleString() : ''
     return (
-        <Card
-            onClick={handleClick}
-            isPressable
-            shadow="sm"
-            className="max-w-[700px] gap-4  p-4 pl-8 text-left border-b border-black"
-        >
+        <Card onClick={handleClick} isPressable shadow="sm" className=" gap-4  p-4 pl-8 text-left ">
             <CardHeader className="">
                 <div className="  text-black text-[32px] font-bold">{issue.issue.title}</div>
             </CardHeader>
