@@ -1,6 +1,5 @@
 'use client'
 import React, { useState, useEffect, useContext } from 'react'
-import useGetIssues from '@/hooks/useGetIssues'
 import {
     Modal,
     ModalContent,
@@ -15,8 +14,15 @@ import {
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-
-export default function DeleteArticle(props) {
+interface Issue {
+    title: string
+    body: string
+}
+interface DeleteArticleProps {
+    issue: Issue
+    number: number
+}
+export default function DeleteArticle(props: DeleteArticleProps) {
     const { issue, number } = props
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const token = Cookies.get('access_token')

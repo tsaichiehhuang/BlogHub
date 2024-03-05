@@ -1,8 +1,12 @@
-import Cookies from 'js-cookie'
-import { useState, useEffect } from 'react'
-
+import { useState } from 'react'
+interface Issue {
+    id: number
+    title: string
+    body: string
+    created_at: string
+}
 function useGetIssues() {
-    const [issues, setIssues] = useState([])
+    const [issues, setIssues] = useState<Issue[]>([])
     const perPage = 10
     const [hasMoreIssues, setHasMoreIssues] = useState(true)
     const owner = 'tsaichiehhuang'

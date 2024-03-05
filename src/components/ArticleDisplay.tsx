@@ -31,7 +31,9 @@ export default function ArticleDisplay() {
                 <ArticleDisplayLayout issue={issue} key={index} />
             ))}
             {!hasMoreIssues && (
-                <div className="text-gray-400 flex justify-center items-center font-bold text-lg p-9">無更多文章</div>
+                <div className="text-gray-400 flex justify-center items-center font-bold text-lg p-9">
+                    - 無更多文章 -{' '}
+                </div>
             )}
         </>
     )

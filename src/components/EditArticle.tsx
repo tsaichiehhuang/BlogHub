@@ -1,6 +1,5 @@
 'use client'
 import React, { useState, useEffect, useContext } from 'react'
-import useGetIssues from '@/hooks/useGetIssues'
 import {
     Modal,
     ModalContent,
@@ -14,24 +13,35 @@ import {
 } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
-
-export default function EditArticle(props) {
+interface Issue {
+    title: string
+    body: string
+}
+interface EditArticleProps {
+    issue: Issue
+    number: number
+}
+interface ValidationError {
+    title: string
+    body: string
+}
+export default function EditArticle(props: EditArticleProps) {
     const { issue, number } = props
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const token = Cookies.get('access_token')
     const [body, setBody] = useState(issue.body)
     const [title, setTitle] = useState(issue.title)
-    const [validationError, setValidationError] = useState(null)
+    const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
 
     const handleClick = () => {
         onOpen()
         setBody(issue.body)
         setTitle(issue.title)
     }
-    const handleBodyChange = (e) => {
+    const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setBody(e.target.value)
     }
-    const handleTitleChange = (e) => {
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
     }
     const handleEditIssue = async () => {
@@ -61,9 +71,9 @@ export default function EditArticle(props) {
         const validateTitle = async () => {
             try {
                 await Yup.string().required('標題為必填').validate(title)
-                setValidationError((prevErrors) => ({ ...prevErrors, title: '' }))
-            } catch (error) {
-                setValidationError((prevErrors) => ({ ...prevErrors, title: error.message }))
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, title: '' }))
+            } catch (error: any) {
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, title: error.message }))
             }
         }
         validateTitle()
@@ -74,7 +84,7 @@ export default function EditArticle(props) {
             try {
                 await Yup.string().min(30, '內容至少要30個字').required('文章內容為必填').validate(body)
                 setValidationError((prevErrors) => ({ ...prevErrors, body: '' }))
-            } catch (error) {
+            } catch (error: any) {
                 setValidationError((prevErrors) => ({ ...prevErrors, body: error.message }))
             }
         }

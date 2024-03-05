@@ -18,7 +18,10 @@ import {
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
-
+interface ValidationError {
+    title: string
+    body: string
+}
 export default function CreateArticle() {
     const token = Cookies.get('access_token')
     const octokit = new Octokit({
@@ -27,12 +30,11 @@ export default function CreateArticle() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const [body, setBody] = useState('')
     const [title, setTitle] = useState('')
-    const [validationError, setValidationError] = useState(null)
-
-    const handleBodyChange = (e) => {
+    const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
+    const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setBody(e.target.value)
     }
-    const handleTitleChange = (e) => {
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
     }
     const handleCreateIssue = async () => {
@@ -57,9 +59,11 @@ export default function CreateArticle() {
             if (res.status === 201) {
                 location.reload()
             }
-        } catch (error) {
+        } catch (error: any) {
             if (error.name === 'ValidationError') {
-                const errors = error.inner.reduce((acc, curr) => {
+                const validationError = error as Yup.ValidationError
+
+                const errors = validationError.inner.reduce((acc: any, curr: any) => {
                     acc[curr.path] = curr.message
                     return acc
                 }, {})
@@ -73,9 +77,9 @@ export default function CreateArticle() {
         const validateTitle = async () => {
             try {
                 await Yup.string().required('標題為必填').validate(title)
-                setValidationError((prevErrors) => ({ ...prevErrors, title: '' }))
-            } catch (error) {
-                setValidationError((prevErrors) => ({ ...prevErrors, title: error.message }))
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, title: '' }))
+            } catch (error: any) {
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, title: error.message }))
             }
         }
         validateTitle()
@@ -85,9 +89,9 @@ export default function CreateArticle() {
         const validateBody = async () => {
             try {
                 await Yup.string().min(30, '內容至少要30個字').required('文章內容為必填').validate(body)
-                setValidationError((prevErrors) => ({ ...prevErrors, body: '' }))
-            } catch (error) {
-                setValidationError((prevErrors) => ({ ...prevErrors, body: error.message }))
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, body: '' }))
+            } catch (error: any) {
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, body: error.message }))
             }
         }
         validateBody()

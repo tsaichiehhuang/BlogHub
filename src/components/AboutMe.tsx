@@ -35,12 +35,12 @@ export default function AboutMe() {
                         <BsGithub />
                         tsaichiehhuang
                     </div>
-                    <div className="md:hidden mt-1 text-xs text-zinc-300"> © 2024 Daniel's Blog.</div>
+                    <div className="md:hidden mt-1 text-xs text-zinc-300"> &copy; 2024 Daniel&apos;s Blog.</div>
                 </div>
             </CardBody>
 
             <CardFooter className="hidden md:block text-tiny  text-center justify-center">
-                <p className="text-tiny  "> © 2024 Daniel's Blog.</p>
+                <p className="text-tiny  "> &copy; 2024 Daniel&apos;s Blog.</p>
             </CardFooter>
         </Card>
     )

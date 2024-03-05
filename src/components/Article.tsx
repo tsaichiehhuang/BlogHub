@@ -1,5 +1,4 @@
 'use client'
-import useGetIssues from '@/hooks/useGetIssues'
 import { useEffect, useState } from 'react'
 import { Card, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@nextui-org/react'
 import { remark } from 'remark'
@@ -8,7 +7,10 @@ import EditArticle from '@/components/EditArticle'
 import DeleteArticle from '@/components/DeleteArticle'
 import Cookies from 'js-cookie'
 
-export default function Article(props) {
+interface ArticleProps {
+    isLogin: boolean
+}
+export default function Article(props: ArticleProps) {
     const { isLogin } = props
     const path = window.location.pathname
     const parts = path.split('/')
@@ -34,7 +36,7 @@ export default function Article(props) {
     const createdAtDate = issue ? new Date(issue.created_at) : null
 
     const formattedCreatedAt = createdAtDate ? createdAtDate.toLocaleString() : ''
-    const formatMarkdown = (markdownContent) => {
+    const formatMarkdown = (markdownContent: string) => {
         const result = remark().use(html).processSync(markdownContent)
         return result.toString()
     }
