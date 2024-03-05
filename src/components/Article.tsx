@@ -11,19 +11,21 @@ interface ArticleProps {
     isLogin: boolean
 }
 export default function Article(props: ArticleProps) {
+    const [number, setNumber] = useState(0)
     const { isLogin } = props
-    const path = window.location.pathname
-    const parts = path.split('/')
-    const number = parseInt(parts[parts.length - 1])
+    if (typeof window !== 'undefined') {
+        const path = window.location.pathname
+        const parts = path.split('/')
+        setNumber(parseInt(parts[parts.length - 1]))
+    }
+
     const [issue, setIssue] = useState({} as any)
-    const token = Cookies.get('access_token')
     const owner = 'tsaichiehhuang'
     const repo = 'TestBlog'
     const getAnIssues = async () => {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {
                 Accept: 'application/vnd.github+json',
-                // Authorization: `Bearer ${token}`,
             },
             method: 'GET',
         })

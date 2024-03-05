@@ -18,9 +18,11 @@ export default function ArticleDisplay() {
     useEffect(() => {
         getIssues(page)
         if (hasMoreIssues) {
-            window.addEventListener('scroll', handleScroll)
-            return () => {
-                window.removeEventListener('scroll', handleScroll)
+            if (typeof window !== 'undefined') {
+                window.addEventListener('scroll', handleScroll)
+                return () => {
+                    window.removeEventListener('scroll', handleScroll)
+                }
             }
         }
     }, [page])
