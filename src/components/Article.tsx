@@ -43,9 +43,11 @@ export default function Article(props) {
             <CardHeader className="justify-between flex">
                 <div className=" text-zinc-700 text-tiny font-medium md:gap-2 gap-1 flex md:justify-center justify-start md:items-center md:flex-row flex-col">
                     發布時間：{formattedCreatedAt}
-                    <Chip className="bg-zinc-100 text-tiny p-1 flex-item text-center" size="sm">
-                        {issue && issue.labels && issue.labels[0]?.name}
-                    </Chip>
+                    {issue.labels && issue.labels[0] && (
+                        <div className="text-gray-500 text-tiny p-1 flex-item text-start">
+                            | {issue && issue.labels && issue.labels[0]?.name}
+                        </div>
+                    )}
                 </div>
 
                 {isLogin && (

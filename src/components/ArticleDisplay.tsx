@@ -30,7 +30,9 @@ export default function ArticleDisplay() {
             {issues.map((issue: any, index: number) => (
                 <ArticleDisplayLayout issue={issue} key={index} />
             ))}
-            {!hasMoreIssues && <div className="flex border-4 justify-center">無更多文章</div>}
+            {!hasMoreIssues && (
+                <div className="text-gray-400 flex justify-center items-center font-bold text-lg p-9">無更多文章</div>
+            )}
         </>
     )
 }

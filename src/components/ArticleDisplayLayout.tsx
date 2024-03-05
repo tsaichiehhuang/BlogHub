@@ -25,10 +25,11 @@ export default function ArticleDisplayLayout(issue: any) {
 
             <CardFooter className="justify-between">
                 <div className=" text-zinc-700 text-tiny font-medium ">發布時間：{formattedCreatedAt}</div>
-
-                <Chip className="bg-zinc-300 text-tiny px-4" size="sm">
-                    {issue.issue.labels[0]?.name}
-                </Chip>
+                {issue.issue.labels[0] && (
+                    <div className="text-gray-500 text-tiny p-1 flex-item text-start">
+                        {issue.issue.labels[0]?.name}
+                    </div>
+                )}
             </CardFooter>
         </Card>
     )
