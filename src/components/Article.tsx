@@ -39,12 +39,9 @@ export default function Article(props) {
         return result.toString()
     }
     return (
-        <Card shadow="sm" className="max-w-[1200px] gap-4  p-4 pl-8 text-left mt-4">
-            <CardHeader className="justify-between ">
-                <div
-                    className=" text-zinc-700 text-tiny font-medium gap-2 flex justify-center items-center flex-row"
-                    style={{ width: `${formattedCreatedAt.length * 16}px` }}
-                >
+        <Card shadow="sm" className="md:max-w-[1200px] gap-4  p-4  text-left mt-4">
+            <CardHeader className="justify-between flex">
+                <div className=" text-zinc-700 text-tiny font-medium md:gap-2 gap-1 flex md:justify-center justify-start md:items-center md:flex-row flex-col">
                     發布時間：{formattedCreatedAt}
                     <Chip className="bg-zinc-100 text-tiny p-1 flex-item text-center" size="sm">
                         {issue && issue.labels && issue.labels[0]?.name}
@@ -52,7 +49,7 @@ export default function Article(props) {
                 </div>
 
                 {isLogin && (
-                    <div className="gap-2 flex">
+                    <div className="md:gap-2 gap-4 flex justify-center items-center">
                         <EditArticle issue={issue} number={number} />
                         <DeleteArticle issue={issue} number={number} />
                     </div>
@@ -61,9 +58,9 @@ export default function Article(props) {
 
             <div className="  text-black text-[32px] font-bold">{issue && issue.title}</div>
             <CardBody className="">
-                <div className="text-zinc-700 text-xl font-medium justify-self-start">
+                <div className="text-zinc-700 md:text-xl md:font-medium md:justify-self-start">
                     <div
-                        className="leading-loose"
+                        className="md:leading-loose"
                         dangerouslySetInnerHTML={{ __html: issue && formatMarkdown(issue.body) }}
                     ></div>
                 </div>

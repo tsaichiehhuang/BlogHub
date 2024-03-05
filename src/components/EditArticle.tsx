@@ -82,9 +82,17 @@ export default function EditArticle(props) {
     }, [body])
     return (
         <>
-            <Button color="primary" onClick={handleClick}>
-                編輯文章
+            <Button className="hidden md:block" color="primary" onClick={handleClick}>
+                <div>編輯文章</div>
             </Button>
+            <div className="md:hidden block" onClick={handleClick}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
+                    <path
+                        d="M4.243 16.6957H0V12.4465L11.435 0.994814C11.6225 0.807068 11.8768 0.701599 12.142 0.701599C12.4072 0.701599 12.6615 0.807068 12.849 0.994814L15.678 3.82695C15.771 3.91996 15.8447 4.03041 15.8951 4.15198C15.9454 4.27356 15.9713 4.40388 15.9713 4.53549C15.9713 4.66709 15.9454 4.79741 15.8951 4.91899C15.8447 5.04056 15.771 5.15101 15.678 5.24402L4.243 16.6957ZM0 18.6987H18V20.7016H0V18.6987Z"
+                        fill="black"
+                    />
+                </svg>
+            </div>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
                 <ModalContent>
                     {(onClose) => (
