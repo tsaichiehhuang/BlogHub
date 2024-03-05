@@ -39,7 +39,7 @@ export default function Article(props) {
         return result.toString()
     }
     return (
-        <Card shadow="sm" className="md:max-w-[1200px] gap-4  p-4  text-left mt-4">
+        <Card shadow="sm" className="md:max-w-[1200px] gap-4  md:p-6 p-4 text-left mt-4">
             <CardHeader className="justify-between flex">
                 <div className=" text-zinc-700 text-tiny font-medium md:gap-2 gap-1 flex md:justify-center justify-start md:items-center md:flex-row flex-col">
                     發布時間：{formattedCreatedAt}

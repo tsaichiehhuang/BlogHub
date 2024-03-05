@@ -13,25 +13,22 @@ export default function Header() {
 
     return (
         <>
-            <Navbar>
-                <NavbarContent justify="start"></NavbarContent>
-                <NavbarContent justify="center"></NavbarContent>
-                <NavbarContent justify="end" className="text-right">
-                    <NavbarItem className=" text-right">
-                        {isLogin ? <div className="font-bold text-lg">嗨,丹尼爾</div> : <LoginButton />}
+            <Navbar maxWidth="full">
+                <NavbarContent justify="end">
+                    <NavbarItem className="text-right">
+                        {isLogin ? (
+                            <div className="flex-row flex items-center">
+                                <div className="font-bold text-lg">嗨,丹尼爾</div> <LogoutButton />
+                            </div>
+                        ) : (
+                            <LoginButton />
+                        )}
                     </NavbarItem>
-                    {isLogin && (
-                        <NavbarItem className=" text-right">
-                            <LogoutButton />
-                        </NavbarItem>
-                    )}
+                    {/* {isLogin && <NavbarItem className=" text-right"></NavbarItem>} */}
                 </NavbarContent>
             </Navbar>
 
             <div className="grid grid-cols-12 grid-rows-3 col-span-12 w-full h-[204px] border-t-2 border-b-2 border-black font-['Pattaya'] text-center text-black text-[64px] ">
-                {/* <div onClick={handleClick} className="row-start-2 col-span-12">
-                    Daniel’s Blog
-                </div> */}
                 <Logo />
             </div>
         </>

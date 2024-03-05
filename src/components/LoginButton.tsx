@@ -24,8 +24,10 @@ export default function LoginButton() {
                     method: 'POST',
                     body: JSON.stringify({ code }),
                 })
-
                 router.push('/')
+                setTimeout(() => {
+                    location.reload()
+                }, 2000)
             })()
         }
     }, [code, router])
