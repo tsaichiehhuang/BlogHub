@@ -11,13 +11,12 @@ interface ArticleProps {
     isLogin: boolean
 }
 export default function Article(props: ArticleProps) {
-    const [number, setNumber] = useState(0)
+    // const [number, setNumber] = useState(0)
     const { isLogin } = props
-    if (typeof window !== 'undefined') {
-        const path = window.location.pathname
-        const parts = path.split('/')
-        setNumber(parseInt(parts[parts.length - 1]))
-    }
+
+    const path = window.location.pathname
+    const parts = path.split('/')
+    const number = parseInt(parts[parts.length - 1])
 
     const [issue, setIssue] = useState({} as any)
     const owner = 'tsaichiehhuang'

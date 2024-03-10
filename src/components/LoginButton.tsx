@@ -7,12 +7,11 @@ import { useRouter } from 'next/navigation'
 
 export default function LoginButton() {
     const router = useRouter()
-    const [code, setCode] = useState<string | null>('')
-    if (typeof window !== 'undefined') {
-        const queryString = window.location.search
-        const urlParams = new URLSearchParams(queryString)
-        setCode(urlParams.get('code'))
-    }
+    // const [code, setCode] = useState<string | null>('')
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    const code = urlParams.get('code')
+
     useEffect(() => {
         const url = window.location.href
         const hasCode = url.includes('?code=') // 判斷是否有 code 參數
