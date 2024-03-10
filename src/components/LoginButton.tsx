@@ -7,10 +7,12 @@ import { useRouter } from 'next/navigation'
 
 export default function LoginButton() {
     const router = useRouter()
-    // const [code, setCode] = useState<string | null>('')
-    const queryString = window.location.search
-    const urlParams = new URLSearchParams(queryString)
-    const code = urlParams.get('code')
+    let code: string | null = null
+    if (typeof window !== 'undefined') {
+        const queryString = window.location.search
+        const urlParams = new URLSearchParams(queryString)
+        code = urlParams.get('code')
+    }
 
     useEffect(() => {
         const url = window.location.href

@@ -7,6 +7,8 @@ interface Issue {
 }
 function useGetIssues() {
     const [issues, setIssues] = useState<Issue[]>([])
+    const [error, setError] = useState<string | null>(null)
+
     const perPage = 10
     const [hasMoreIssues, setHasMoreIssues] = useState(true)
     const owner = 'tsaichiehhuang'
@@ -32,12 +34,12 @@ function useGetIssues() {
             if (newIssues.length < perPage) {
                 setHasMoreIssues(false)
             }
-        } catch (error) {
-            console.error('Error fetching class data:', error)
+        } catch (error: any) {
+            setError(error.message)
         }
     }
 
-    return { getIssues, issues, hasMoreIssues }
+    return { getIssues, issues, hasMoreIssues, error }
 }
 
 export default useGetIssues
