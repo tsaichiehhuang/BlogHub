@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 
 export default function AboutMe() {
     return (
-        <Card className="md:w-full gap-4 justify-center p-4 md:p-6">
+        <Card className="md:w-full gap-4 justify-center p-4 md:p-6 mb-4">
             <CardHeader className="hidden md:flex gap-4 pb-0 pt-2 px-4 md:flex-col items-center text-center">
                 <div className="hidden md:flex">
                     <Image alt="avatar" src="/avatar.png" width={200} />

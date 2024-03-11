@@ -71,7 +71,10 @@ export default function Article(props: ArticleProps) {
                     </Card>
                 )
             ) : (
-                <Card shadow="sm" className="md:w-[960px] gap-4  md:p-6 p-4 text-left mt-4">
+                <Card
+                    shadow="sm"
+                    className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-6 p-4 text-left mt-4 max-w-[400px] min-w-[400px]"
+                >
                     <CardHeader className="justify-start items-start flex-col flex">
                         <div className="w-full justify-between flex flex-row">
                             <div className=" text-zinc-700 text-tiny font-medium md:gap-2 gap-1 flex md:justify-center justify-start md:items-center md:flex-row flex-col">
