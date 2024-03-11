@@ -69,11 +69,11 @@ export default function EditArticle(props: EditArticleProps) {
                 title: '文章編輯成功',
                 text: '您的文章已成功編輯。',
                 confirmButtonText: '確定',
-                timer: 5000,
+                timer: 3000,
             })
             setTimeout(() => {
                 location.reload()
-            }, 5000)
+            }, 3000)
         }
     }
     useEffect(() => {

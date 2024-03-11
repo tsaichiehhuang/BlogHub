@@ -52,11 +52,11 @@ export default function DeleteArticle(props: DeleteArticleProps) {
                 title: '文章刪除成功',
                 text: '您的文章已成功刪除。',
                 confirmButtonText: '確定',
-                timer: 5000,
+                timer: 3000,
             })
             setTimeout(() => {
                 router.push('/')
-            }, 5000)
+            }, 3000)
         }
     }
     return (

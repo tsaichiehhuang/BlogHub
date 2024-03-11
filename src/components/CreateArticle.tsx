@@ -110,7 +110,7 @@ export default function CreateArticle() {
 
     return (
         <>
-            <Card onClick={onOpen} isPressable shadow="sm" className="min-h-4/5 gap-4  p-4 pl-8 text-left ">
+            <Card onClick={onOpen} isPressable shadow="sm" className="max-h-[140px] gap-4  p-4 pl-8 text-left ">
                 <CardBody className="">
                     <Input
                         key="outside"
