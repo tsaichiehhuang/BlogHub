@@ -18,7 +18,7 @@ export default function Header() {
                     <NavbarItem className="text-right">
                         {isLogin ? (
                             <div className="flex-row flex items-center">
-                                <div className="font-bold text-lg">嗨,丹尼爾</div> <LogoutButton />
+                                <div className="font-bold text-md">嗨,丹尼爾</div> <LogoutButton />
                             </div>
                         ) : (
                             <LoginButton />
@@ -28,7 +28,7 @@ export default function Header() {
                 </NavbarContent>
             </Navbar>
 
-            <div className="grid grid-cols-12 grid-rows-3 col-span-12 w-full h-[204px] border-t-2 border-b-2 border-black font-['Pattaya'] text-center text-black text-[64px] ">
+            <div className="grid grid-cols-12 grid-rows-3 col-span-12 w-full h-[150px] border-t-2 border-b-2 border-black font-['Pattaya'] text-center text-black text-[40px] ">
                 <Logo />
             </div>
         </>

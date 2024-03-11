@@ -21,7 +21,7 @@ export default function LogoutButton() {
         <Button
             className="m-4 bg-[#222223] font-semibold text-white p-5"
             radius="full"
-            size="lg"
+            size="md"
             onClick={handleLogout}
         >
             Logout

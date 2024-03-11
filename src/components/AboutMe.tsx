@@ -7,13 +7,13 @@ import { useRouter } from 'next/navigation'
 
 export default function AboutMe() {
     return (
-        <Card className="md:max-w-[400px] gap-4 justify-center p-4 md:p-6">
+        <Card className="md:w-full gap-4 justify-center p-4 md:p-6">
             <CardHeader className="hidden md:flex gap-4 pb-0 pt-2 px-4 md:flex-col items-center text-center">
                 <div className="hidden md:flex">
                     <Image alt="avatar" src="/avatar.png" width={200} />
                 </div>
-                <div className="  text-black text-[40px] font-bold ">丹尼爾</div>
-                <div className="  text-zinc-700 text-xl font-medium ">
+                <div className="  text-black text-[24px] font-bold ">丹尼爾</div>
+                <div className="  text-zinc-700 text-md font-medium ">
                     丹尼爾是一名工程師，他過往學一些人使用 GitHub Issue 來充當自己的部落格。
                 </div>
             </CardHeader>
@@ -27,11 +27,11 @@ export default function AboutMe() {
                     <div className="mb-1 md:hidden">
                         丹尼爾是一名工程師，他過往學一些人使用 GitHub Issue 來充當自己的部落格。
                     </div>
-                    <div className="text-sm flex-row flex items-center gap-2">
+                    <div className="text-xs flex-row flex items-center gap-2">
                         <MdOutlineEmail />
                         a0970605512@gmail.com
                     </div>
-                    <div className="text-sm flex-row flex items-center gap-2">
+                    <div className="text-xs flex-row flex items-center gap-2">
                         <BsGithub />
                         tsaichiehhuang
                     </div>
@@ -40,7 +40,7 @@ export default function AboutMe() {
             </CardBody>
 
             <CardFooter className="hidden md:block text-tiny  text-center justify-center">
-                <p className="text-tiny  "> &copy; 2024 Daniel&apos;s Blog.</p>
+                <p className="text-xs  "> &copy; 2024 Daniel&apos;s Blog.</p>
             </CardFooter>
         </Card>
     )

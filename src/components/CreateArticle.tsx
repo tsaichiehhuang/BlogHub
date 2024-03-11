@@ -99,7 +99,7 @@ export default function CreateArticle() {
 
     return (
         <>
-            <Card onClick={onOpen} isPressable shadow="sm" className=" gap-4  p-4 pl-8 text-left ">
+            <Card onClick={onOpen} isPressable shadow="sm" className="h-4/5 gap-4  p-4 pl-8 text-left ">
                 <CardBody className="">
                     <Input
                         key="outside"
@@ -107,7 +107,7 @@ export default function CreateArticle() {
                         labelPlacement="outside"
                         placeholder="想發表什麼內容呢？"
                         onChange={handleTitleChange}
-                        className="  text-black text-[28px] font-bold"
+                        className="  text-black text-[24px] font-bold"
                         size="lg"
                     />
                 </CardBody>

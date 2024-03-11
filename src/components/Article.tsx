@@ -44,7 +44,7 @@ export default function Article(props: ArticleProps) {
                 error ? (
                     <Error />
                 ) : (
-                    <Card shadow="sm" className="md:w-[1200px] gap-4  md:p-6 p-4 text-left mt-4">
+                    <Card shadow="sm" className="md:w-[960px] gap-4  md:p-6 p-4 text-left mt-4">
                         <Skeleton className="rounded-lg">
                             <div className="h-24 rounded-lg bg-default-300"></div>
                         </Skeleton>
@@ -71,7 +71,7 @@ export default function Article(props: ArticleProps) {
                     </Card>
                 )
             ) : (
-                <Card shadow="sm" className="md:max-w-[1200px] gap-4  md:p-6 p-4 text-left mt-4">
+                <Card shadow="sm" className="md:max-w-[960px] gap-4  md:p-6 p-4 text-left mt-4">
                     <CardHeader className="justify-between flex">
                         <div className=" text-zinc-700 text-tiny font-medium md:gap-2 gap-1 flex md:justify-center justify-start md:items-center md:flex-row flex-col">
                             發布時間：{formattedCreatedAt}
@@ -89,9 +89,9 @@ export default function Article(props: ArticleProps) {
                             </div>
                         )}
                     </CardHeader>
-                    <div className="  text-black text-[32px] font-bold">{issue && issue.title}</div>
+                    <div className="  text-black text-[24px] font-bold">{issue && issue.title}</div>
                     <CardBody className="">
-                        <div className="text-zinc-700 md:text-xl md:font-medium md:justify-self-start">
+                        <div className="text-zinc-700 md:text-md md:font-medium md:justify-self-start">
                             <div
                                 className="md:leading-loose"
                                 dangerouslySetInnerHTML={{ __html: issue && formatMarkdown(issue.body) }}

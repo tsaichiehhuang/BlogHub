@@ -14,11 +14,11 @@ export default function ArticleDisplayLayout(issue: any) {
     return (
         <Card onClick={handleClick} isPressable shadow="sm" className=" gap-4  p-4 md:pl-8 text-left ">
             <CardHeader className="">
-                <div className="  text-black text-[32px] font-bold">{issue.issue.title}</div>
+                <div className="  text-black text-[24px] font-bold">{issue.issue.title}</div>
             </CardHeader>
 
             <CardBody className="">
-                <div className="text-zinc-700 text-xl font-medium justify-self-start">
+                <div className="text-zinc-700 text-md font-medium justify-self-start">
                     {issue.issue.body.substring(0, 80) + '...'}
                 </div>
             </CardBody>
