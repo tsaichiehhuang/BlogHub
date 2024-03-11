@@ -14,6 +14,8 @@ import {
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
+
 interface Issue {
     title: string
     body: string
@@ -45,9 +47,16 @@ export default function DeleteArticle(props: DeleteArticleProps) {
             body: JSON.stringify({ state: 'closed' }),
         })
         if (res.status === 200) {
+            Swal.fire({
+                icon: 'success',
+                title: '文章刪除成功',
+                text: '您的文章已成功刪除。',
+                confirmButtonText: '確定',
+                timer: 5000,
+            })
             setTimeout(() => {
                 router.push('/')
-            }, 1000)
+            }, 5000)
         }
     }
     return (

@@ -18,6 +18,8 @@ import {
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
+import Swal from 'sweetalert2'
+
 interface ValidationError {
     title: string
     body: string
@@ -57,7 +59,16 @@ export default function CreateArticle() {
             })
 
             if (res.status === 201) {
-                location.reload()
+                Swal.fire({
+                    icon: 'success',
+                    title: '文章發表成功',
+                    text: '您的文章已成功發布。',
+                    confirmButtonText: '確定',
+                    timer: 5000,
+                })
+                setTimeout(() => {
+                    location.reload(), 5000
+                })
             }
         } catch (error: any) {
             if (error.name === 'ValidationError') {
@@ -99,7 +110,7 @@ export default function CreateArticle() {
 
     return (
         <>
-            <Card onClick={onOpen} isPressable shadow="sm" className="h-4/5 gap-4  p-4 pl-8 text-left ">
+            <Card onClick={onOpen} isPressable shadow="sm" className="min-h-4/5 gap-4  p-4 pl-8 text-left ">
                 <CardBody className="">
                     <Input
                         key="outside"

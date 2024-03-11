@@ -71,25 +71,28 @@ export default function Article(props: ArticleProps) {
                     </Card>
                 )
             ) : (
-                <Card shadow="sm" className="md:max-w-[960px] gap-4  md:p-6 p-4 text-left mt-4">
-                    <CardHeader className="justify-between flex">
-                        <div className=" text-zinc-700 text-tiny font-medium md:gap-2 gap-1 flex md:justify-center justify-start md:items-center md:flex-row flex-col">
-                            發布時間：{formattedCreatedAt}
-                            {issue?.labels && issue.labels[0] && (
-                                <div className="text-gray-500 text-tiny p-1 flex-item text-start">
-                                    | {issue && issue.labels && issue.labels[0]?.name}
+                <Card shadow="sm" className="md:w-[960px] gap-4  md:p-6 p-4 text-left mt-4">
+                    <CardHeader className="justify-start items-start flex-col flex">
+                        <div className="w-full justify-between flex flex-row">
+                            <div className=" text-zinc-700 text-tiny font-medium md:gap-2 gap-1 flex md:justify-center justify-start md:items-center md:flex-row flex-col">
+                                發布時間：{formattedCreatedAt}
+                                {issue?.labels && issue.labels[0] && (
+                                    <div className="text-gray-500 text-tiny p-1 flex-item text-start">
+                                        | {issue && issue.labels && issue.labels[0]?.name}
+                                    </div>
+                                )}
+                            </div>
+
+                            {isLogin && (
+                                <div className="md:gap-2 gap-4 flex justify-center items-center">
+                                    <EditArticle issue={issue} number={number as number} />
+                                    <DeleteArticle issue={issue} number={number as number} />
                                 </div>
                             )}
                         </div>
-
-                        {isLogin && (
-                            <div className="md:gap-2 gap-4 flex justify-center items-center">
-                                <EditArticle issue={issue} number={number as number} />
-                                <DeleteArticle issue={issue} number={number as number} />
-                            </div>
-                        )}
+                        <div className="  text-black text-[24px] font-bold">{issue && issue.title}</div>
                     </CardHeader>
-                    <div className="  text-black text-[24px] font-bold">{issue && issue.title}</div>
+
                     <CardBody className="">
                         <div className="text-zinc-700 md:text-md md:font-medium md:justify-self-start">
                             <div

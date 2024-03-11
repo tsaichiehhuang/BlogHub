@@ -13,6 +13,8 @@ import {
 } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
+import Swal from 'sweetalert2'
+
 interface Issue {
     title: string
     body: string
@@ -62,9 +64,16 @@ export default function EditArticle(props: EditArticleProps) {
             body: JSON.stringify({ title: title, body: body }),
         })
         if (res.status === 200) {
+            Swal.fire({
+                icon: 'success',
+                title: '文章編輯成功',
+                text: '您的文章已成功編輯。',
+                confirmButtonText: '確定',
+                timer: 5000,
+            })
             setTimeout(() => {
                 location.reload()
-            }, 1000)
+            }, 5000)
         }
     }
     useEffect(() => {
