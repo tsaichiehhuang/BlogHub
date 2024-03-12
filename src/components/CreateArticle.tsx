@@ -24,12 +24,18 @@ interface ValidationError {
     title: string
     body: string
 }
+interface label {
+    name: string
+    color: string
+}
 export default function CreateArticle() {
     const token = Cookies.get('access_token')
     const octokit = new Octokit({
         auth: `${token}`,
     })
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
+    const [selectedLabels, setSelectedLabels] = useState<Array<string>>([])
+
     const [body, setBody] = useState('')
     const [title, setTitle] = useState('')
     const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
@@ -53,6 +59,7 @@ export default function CreateArticle() {
                 repo: 'TestBlog',
                 title,
                 body,
+                labels: selectedLabels,
                 headers: {
                     'X-GitHub-Api-Version': '2022-11-28',
                 },
@@ -107,7 +114,20 @@ export default function CreateArticle() {
         }
         validateBody()
     }, [body])
-
+    const labelName = [
+        { name: 'new', color: 'FBCA04' },
+        { name: 'hot', color: 'F9D0C4' },
+        { name: 'practice', color: 'C5DEF5' },
+    ]
+    const handleLabelChoose = (label: label) => {
+        const newSelectedLabels = [...selectedLabels]
+        if (newSelectedLabels.includes(label.name)) {
+            newSelectedLabels.splice(newSelectedLabels.indexOf(label.name), 1)
+        } else {
+            newSelectedLabels.push(label.name)
+        }
+        setSelectedLabels(newSelectedLabels)
+    }
     return (
         <>
             <Card onClick={onOpen} isPressable shadow="sm" className="max-h-[140px] gap-4  p-4 pl-8 text-left ">
@@ -129,27 +149,44 @@ export default function CreateArticle() {
                         <>
                             <ModalHeader className="flex flex-col gap-1">新增文章</ModalHeader>
                             <ModalBody>
-                                <>
-                                    <Input
-                                        key="outside"
-                                        label="標題"
-                                        labelPlacement="outside"
-                                        placeholder="輸入標題"
-                                        value={title}
-                                        onChange={handleTitleChange}
-                                        errorMessage={validationError ? validationError.title : ' '}
-                                    />
-                                </>
-                                <>
-                                    <Textarea
-                                        label="文章內容"
-                                        labelPlacement="outside"
-                                        placeholder="輸入內文"
-                                        value={body}
-                                        onChange={handleBodyChange}
-                                        errorMessage={validationError ? validationError.body : ' '}
-                                    />
-                                </>
+                                <Input
+                                    key="outside"
+                                    label="標題"
+                                    labelPlacement="outside"
+                                    placeholder="輸入標題"
+                                    value={title}
+                                    onChange={handleTitleChange}
+                                    errorMessage={validationError ? validationError.title : ' '}
+                                />
+
+                                <Textarea
+                                    label="文章內容"
+                                    labelPlacement="outside"
+                                    placeholder="輸入內文"
+                                    value={body}
+                                    onChange={handleBodyChange}
+                                    errorMessage={validationError ? validationError.body : ' '}
+                                />
+                                <div className="">
+                                    <div className="mb-1 text-sm">選擇標籤</div>
+                                    <div className="flex gap-1">
+                                        {labelName.map((label, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => handleLabelChoose(label)}
+                                                style={{
+                                                    backgroundColor: selectedLabels.includes(label.name)
+                                                        ? `#${label.color}`
+                                                        : 'transparent',
+                                                    borderColor: `#${label.color}`,
+                                                }}
+                                                className="px-2 text-sm bg-transparent border-2 rounded-lg "
+                                            >
+                                                {label.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="danger" variant="light" onPress={onClose}>

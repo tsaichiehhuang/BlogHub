@@ -20,6 +20,10 @@ interface Comment {
     }
     body: string
 }
+interface label {
+    name: string
+    color: string
+}
 export default function Article(props: ArticleProps) {
     const { getAnIssue, issue, error } = useAnIssue()
     const { comments, getComments } = useGetComments()
@@ -87,12 +91,17 @@ export default function Article(props: ArticleProps) {
                     <CardHeader className="flex flex-col items-start justify-start">
                         <div className="flex flex-row justify-between w-full">
                             <div className="flex flex-col justify-start gap-1 font-medium text-zinc-700 text-tiny md:gap-2 md:justify-center md:items-center md:flex-row">
-                                發布時間：{formattedCreatedAt}
-                                {issue?.labels && issue.labels[0] && (
-                                    <div className="p-1 text-gray-500 text-tiny flex-item text-start">
-                                        | {issue && issue.labels && issue.labels[0]?.name}
-                                    </div>
-                                )}
+                                發布時間：{formattedCreatedAt} |
+                                {issue?.labels &&
+                                    issue.labels.map((label: label, index: number) => (
+                                        <div
+                                            key={index}
+                                            style={{ backgroundColor: `#${label.color}` }}
+                                            className="p-1 rounded-lg text-tiny flex-item text-start"
+                                        >
+                                            {label.name}
+                                        </div>
+                                    ))}
                             </div>
 
                             {isLogin && (
