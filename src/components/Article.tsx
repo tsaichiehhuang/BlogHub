@@ -91,7 +91,8 @@ export default function Article(props: ArticleProps) {
                     <CardHeader className="flex flex-col items-start justify-start">
                         <div className="flex flex-row justify-between w-full">
                             <div className="flex flex-col justify-start gap-1 font-medium text-zinc-700 text-tiny md:gap-2 md:justify-center md:items-center md:flex-row">
-                                發布時間：{formattedCreatedAt} |
+                                發布時間：{formattedCreatedAt}
+                                {issue?.labels?.length !== 0 && <div>|</div>}
                                 {issue?.labels &&
                                     issue.labels.map((label: label, index: number) => (
                                         <div
