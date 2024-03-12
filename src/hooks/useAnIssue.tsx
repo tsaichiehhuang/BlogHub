@@ -5,6 +5,8 @@ interface Issue {
     body: string
     created_at: string
     labels: any
+    comments_url: string
+    comments: number
 }
 function useAnIssue() {
     const [issue, setIssue] = useState<Issue | null>(null)
