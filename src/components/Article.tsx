@@ -1,32 +1,22 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { Card, Skeleton, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@nextui-org/react'
+import { Card, Skeleton, CardHeader, CardBody, CardFooter, Image, Divider } from '@nextui-org/react'
 import { remark } from 'remark'
 import html from 'remark-html'
 import EditArticle from '@/components/EditArticle'
 import DeleteArticle from '@/components/DeleteArticle'
 import Error from '@/components/Error'
-import useAnIssue from '@/hooks/useAnIssue'
-import useGetComments from '@/hooks/useGetComments'
+import { Issue, Label, Comment } from '@/types'
 
 interface ArticleProps {
     isLogin: boolean
 }
-interface Comment {
-    id: number
-    user: {
-        avatar_url: string
-        login: string
-    }
-    body: string
-}
-interface label {
-    name: string
-    color: string
-}
+
 export default function Article(props: ArticleProps) {
-    const { getAnIssue, issue, error } = useAnIssue()
-    const { comments, getComments } = useGetComments()
+    const [comments, setComments] = useState([])
+    const [issue, setIssue] = useState<Issue | null>(null)
+    const [error, setError] = useState<string | null>(null)
+    const [statusCode, setStatusCode] = useState<number | null>(null)
 
     const { isLogin } = props
     let number: number | null = null
@@ -39,10 +29,24 @@ export default function Article(props: ArticleProps) {
     }
 
     useEffect(() => {
-        getAnIssue(number)
+        const fetchAnIssue = async (number: number | null) => {
+            try {
+                const response = await fetch(`/api/get-an-issue/${number}`)
+                const data = await response.json()
+                setIssue(data.issue)
+                setComments(data.comments)
+                if (!response.ok) {
+                    setStatusCode(response.status)
+                    return
+                }
+            } catch (error: any) {
+                setError(error.message)
+            }
+        }
 
-        getComments(issue?.comments_url ?? '')
+        fetchAnIssue(number)
     }, [number, issue?.comments_url])
+
     const createdAtDate = issue ? new Date(issue.created_at) : null
 
     const formattedCreatedAt = createdAtDate ? createdAtDate.toLocaleString() : ''
@@ -53,9 +57,9 @@ export default function Article(props: ArticleProps) {
 
     return (
         <>
-            {issue === null ? (
+            {issue === null && number === null ? (
                 error ? (
-                    <Error />
+                    <Error statusCode={statusCode} />
                 ) : (
                     <Card shadow="sm" className="md:w-[960px] gap-4  md:p-6 p-4 text-left mt-4">
                         <Skeleton className="rounded-lg">
@@ -94,7 +98,7 @@ export default function Article(props: ArticleProps) {
                                 發布時間：{formattedCreatedAt}
                                 {issue?.labels?.length !== 0 && <div>|</div>}
                                 {issue?.labels &&
-                                    issue.labels.map((label: label, index: number) => (
+                                    issue.labels.map((label: Label, index: number) => (
                                         <div
                                             key={index}
                                             style={{ backgroundColor: `#${label.color}` }}
@@ -119,7 +123,7 @@ export default function Article(props: ArticleProps) {
                         <div className="text-zinc-700 md:text-md md:font-medium md:justify-self-start">
                             <div
                                 className="md:leading-loose"
-                                dangerouslySetInnerHTML={{ __html: issue && formatMarkdown(issue.body) }}
+                                dangerouslySetInnerHTML={{ __html: issue ? formatMarkdown(issue.body) : '' }}
                             ></div>
                         </div>
                     </CardBody>
@@ -130,7 +134,7 @@ export default function Article(props: ArticleProps) {
                             <CardFooter className="flex flex-col items-start justify-start">
                                 <div className="flex flex-row items-end justify-end w-full">
                                     <div className="ml-2 font-bold text-zinc-700 text-tiny">
-                                        {issue.comments} 則留言
+                                        {issue?.comments} 則留言
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">

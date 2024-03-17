@@ -4,7 +4,6 @@ function useGetComments() {
     const [comments, setComments] = useState([])
 
     const getComments = async (commentsUrl: string) => {
-        console.log('commentsUrl:', commentsUrl)
         try {
             const response = await fetch(commentsUrl)
             if (!response.ok) {

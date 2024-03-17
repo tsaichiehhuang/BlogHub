@@ -2,14 +2,18 @@
 
 import React, { useState, useEffect } from 'react'
 import ArticleDisplayLayout from './ArticleDisplayLayout'
-import useGetIssues from '@/hooks/useGetIssues'
-import { Card, Skeleton, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@nextui-org/react'
+import { Card, Skeleton, CardHeader, CardBody, CardFooter } from '@nextui-org/react'
 import Error from '@/components/Error'
+import { Issue } from '@/types'
 
 export default function ArticleDisplay() {
     const [page, setPage] = useState(1)
-    const { getIssues, issues, hasMoreIssues, error } = useGetIssues()
+    const [issues, setIssues] = useState<Issue[]>([])
+    const [hasMoreIssues, setHasMoreIssues] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+    const [statusCode, setStatusCode] = useState<number>(200)
 
+    const perPage = 10
     const handleScroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = document.documentElement
         if (scrollTop + clientHeight >= scrollHeight - 20) {
@@ -18,8 +22,24 @@ export default function ArticleDisplay() {
     }
 
     useEffect(() => {
-        getIssues(page)
-        if (hasMoreIssues) {
+        const fetchIssues = async () => {
+            try {
+                const response = await fetch(`/api/get-issues?page=${page}`)
+                const data = await response.json()
+
+                setStatusCode(response.status)
+                if (response.status === 200) {
+                    setIssues((prevIssues) => [...prevIssues, ...data])
+                }
+                if (data.length < perPage) {
+                    setHasMoreIssues(false)
+                }
+            } catch (error: any) {
+                setError(error.message)
+            }
+        }
+        fetchIssues()
+        if (hasMoreIssues && !error) {
             if (typeof window !== 'undefined') {
                 window.addEventListener('scroll', handleScroll)
                 return () => {
@@ -28,6 +48,7 @@ export default function ArticleDisplay() {
             }
         }
     }, [page])
+
     const Loading = () => (
         <Card shadow="sm" className="h-72 space-y-5  p-4 md:pl-8 ">
             <CardHeader className="">
@@ -43,7 +64,6 @@ export default function ArticleDisplay() {
             </CardBody>
 
             <CardFooter className="justify-between">
-                {' '}
                 <Skeleton className="w-3/5 rounded-lg">
                     <div className="h-8 w-3/5 rounded-lg bg-default-200"></div>
                 </Skeleton>
@@ -54,7 +74,7 @@ export default function ArticleDisplay() {
         <>
             {Object.keys(issues).length === 0 ? (
                 error ? (
-                    <Error />
+                    <Error statusCode={statusCode} />
                 ) : (
                     <>
                         <Loading />

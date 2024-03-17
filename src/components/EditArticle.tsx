@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Modal,
     ModalContent,
@@ -14,13 +14,10 @@ import {
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
+import { Issue } from '@/types'
 
-interface Issue {
-    title: string
-    body: string
-}
 interface EditArticleProps {
-    issue: Issue
+    issue: Issue | null
     number: number
 }
 interface ValidationError {
@@ -31,14 +28,14 @@ export default function EditArticle(props: EditArticleProps) {
     const { issue, number } = props
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const token = Cookies.get('access_token')
-    const [body, setBody] = useState(issue.body)
-    const [title, setTitle] = useState(issue.title)
+    const [body, setBody] = useState(issue?.body)
+    const [title, setTitle] = useState(issue?.title)
     const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
 
     const handleClick = () => {
         onOpen()
-        setBody(issue.body)
-        setTitle(issue.title)
+        setBody(issue?.body)
+        setTitle(issue?.title)
     }
     const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setBody(e.target.value)
@@ -123,7 +120,7 @@ export default function EditArticle(props: EditArticleProps) {
                                     type="email"
                                     label="標題"
                                     labelPlacement="outside"
-                                    placeholder={issue && issue.title}
+                                    placeholder={issue?.title}
                                     value={title}
                                     onChange={handleTitleChange}
                                     errorMessage={validationError ? validationError.title : ' '}
@@ -131,7 +128,7 @@ export default function EditArticle(props: EditArticleProps) {
                                 <Textarea
                                     label="文章內容"
                                     labelPlacement="outside"
-                                    placeholder={issue && issue.body}
+                                    placeholder={issue?.body}
                                     value={body}
                                     onChange={handleBodyChange}
                                     errorMessage={validationError ? validationError.body : ' '}

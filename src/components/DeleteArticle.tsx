@@ -1,27 +1,12 @@
 'use client'
-import React, { useState, useEffect, useContext } from 'react'
-import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Button,
-    useDisclosure,
-    Textarea,
-    Input,
-} from '@nextui-org/react'
-import { Octokit } from '@octokit/rest'
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import Swal from 'sweetalert2'
+import { Issue, Label } from '@/types'
 
-interface Issue {
-    title: string
-    body: string
-}
 interface DeleteArticleProps {
-    issue: Issue
+    issue: Issue | null
     number: number
 }
 export default function DeleteArticle(props: DeleteArticleProps) {
@@ -80,7 +65,7 @@ export default function DeleteArticle(props: DeleteArticleProps) {
                             <ModalBody className="flex-row whitespace-normal">
                                 <div>
                                     確定刪除
-                                    <b className="font-bold font-lg">「{issue.title}」</b>嗎？
+                                    <b className="font-bold font-lg">「{issue?.title}」</b>嗎？
                                 </div>
                             </ModalBody>
                             <ModalFooter>
