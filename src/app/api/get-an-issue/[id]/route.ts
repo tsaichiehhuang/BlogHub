@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server'
+
 interface params {
     id: number
 }
@@ -21,7 +23,7 @@ export async function GET(request: Request, { params }: { params: params }) {
                     : res.status === 403
                     ? 'Forbidden to access issue'
                     : 'Failed to fetch issue'
-            return new Response(errorMessage)
+            return NextResponse.json({ error: errorMessage }, { status: res.status })
         }
         const commentsUrl = data.comments_url
         const commentsResponse = await fetch(commentsUrl)

@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server'
+
 export async function GET(request: Request) {
     const queryParams = new URLSearchParams(request.url.split('?')[1])
     const page = queryParams.get('page') || '1'
@@ -24,7 +26,7 @@ export async function GET(request: Request) {
                     : res.status === 403
                     ? 'Forbidden to access issue'
                     : 'Failed to fetch issue'
-            return new Response(errorMessage)
+            return NextResponse.json({ error: errorMessage }, { status: res.status })
         }
         return new Response(JSON.stringify(data), {
             status: 200,
@@ -33,9 +35,11 @@ export async function GET(request: Request) {
             },
         })
     } catch (error: any) {
-        return new Response(error.message, {
-            status: 500,
-            statusText: 'Internal Server Error',
-        })
+        return NextResponse.json(
+            { error: error.message },
+            {
+                status: 500,
+            }
+        )
     }
 }

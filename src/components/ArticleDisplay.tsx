@@ -11,7 +11,7 @@ export default function ArticleDisplay() {
     const [issues, setIssues] = useState<Issue[]>([])
     const [hasMoreIssues, setHasMoreIssues] = useState(true)
     const [error, setError] = useState<string | null>(null)
-    const [statusCode, setStatusCode] = useState<number>(200)
+    const [statusCode, setStatusCode] = useState<number>()
 
     const perPage = 10
     const handleScroll = () => {
@@ -23,19 +23,18 @@ export default function ArticleDisplay() {
 
     useEffect(() => {
         const fetchIssues = async () => {
-            try {
-                const response = await fetch(`/api/get-issues?page=${page}`)
-                const data = await response.json()
-
+            const response = await fetch(`/api/get-issues?page=${page}`)
+            const data = await response.json()
+            if (!response.ok) {
                 setStatusCode(response.status)
-                if (response.status === 200) {
-                    setIssues((prevIssues) => [...prevIssues, ...data])
-                }
-                if (data.length < perPage) {
-                    setHasMoreIssues(false)
-                }
-            } catch (error: any) {
-                setError(error.message)
+                setError(response.statusText)
+            }
+
+            if (response.status === 200) {
+                setIssues((prevIssues) => [...prevIssues, ...data])
+            }
+            if (data.length < perPage) {
+                setHasMoreIssues(false)
             }
         }
         fetchIssues()

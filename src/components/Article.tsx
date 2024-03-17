@@ -61,7 +61,7 @@ export default function Article(props: ArticleProps) {
                 error ? (
                     <Error statusCode={statusCode} />
                 ) : (
-                    <Card shadow="sm" className="md:w-[960px] gap-4  md:p-6 p-4 text-left mt-4">
+                    <Card shadow="sm" className="md:w-[960px] gap-4  md:p-10 p-4 text-left mt-4">
                         <Skeleton className="rounded-lg">
                             <div className="h-24 rounded-lg bg-default-300"></div>
                         </Skeleton>
@@ -90,7 +90,7 @@ export default function Article(props: ArticleProps) {
             ) : (
                 <Card
                     shadow="sm"
-                    className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-6 p-4 text-left mt-4 max-w-[400px] min-w-[400px]"
+                    className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-10 p-4 text-left mt-4 max-w-[400px] min-w-[400px]"
                 >
                     <CardHeader className="flex flex-col items-start justify-start">
                         <div className="flex flex-row justify-between w-full">
@@ -120,12 +120,12 @@ export default function Article(props: ArticleProps) {
                     </CardHeader>
 
                     <CardBody className="mb-2">
-                        <div className="text-zinc-700 md:text-md md:font-medium md:justify-self-start">
-                            <div
-                                className="md:leading-loose"
-                                dangerouslySetInnerHTML={{ __html: issue ? formatMarkdown(issue.body) : '' }}
-                            ></div>
-                        </div>
+                        {/* <div className="text-zinc-700 md:text-md md:font-medium md:justify-self-start"> */}
+                        <article
+                            className="md:leading-loose prose prose-slate max-w-none w-11/12"
+                            dangerouslySetInnerHTML={{ __html: issue ? formatMarkdown(issue.body) : '' }}
+                        ></article>
+                        {/* </div> */}
                     </CardBody>
 
                     {comments && comments.length > 0 && (
