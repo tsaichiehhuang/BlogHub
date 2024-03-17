@@ -98,7 +98,12 @@ export default function EditArticle(props: EditArticleProps) {
     }, [body])
     return (
         <>
-            <Button size="sm" className="hidden p-0 font-bold text-white bg-zinc-800 md:block" onClick={handleClick}>
+            <Button
+                size="sm"
+                color="primary"
+                className="hidden p-0 font-bold text-white  md:block"
+                onClick={handleClick}
+            >
                 <div>編輯文章</div>
             </Button>
             <div className="block md:hidden" onClick={handleClick}>
@@ -135,7 +140,7 @@ export default function EditArticle(props: EditArticleProps) {
                                 />
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
+                                <Button color="default" variant="light" onPress={onClose}>
                                     取消
                                 </Button>
                                 <Button color="primary" onPress={onClose} onClick={handleEditIssue}>

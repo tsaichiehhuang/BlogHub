@@ -6,13 +6,6 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: { 'Noto Sans TC': ['Noto Sans TC'], Pattaya: ['Pattaya'] },
-
-            colors: {
-                mainBlue: '#6689CB',
-                mainGreen: '#5FCC7D ',
-                mainOrange: '#F2A660 ',
-                darkGray: '#B0B0B0',
-            },
             minHeight: {
                 56: '14rem',
             },
@@ -22,20 +15,20 @@ module.exports = {
     plugins: [
         require('@tailwindcss/typography'),
         nextui({
-            prefix: 'nextui', // prefix for themes variables
-            addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
-            defaultTheme: 'light', // default theme from the themes object
-            defaultExtendTheme: 'light', // default theme to extend on custom themes
-            layout: {}, // common layout tokens (applied to all themes)
+            prefix: 'nextui',
+            addCommonColors: false,
+            defaultTheme: 'light',
+            defaultExtendTheme: 'light',
+            layout: {},
             themes: {
                 light: {
-                    layout: {}, // light theme layout tokens
+                    layout: {},
                     colors: {
                         background: '#FDFDFD',
                         foreground: '#11181C',
                         primary: {
                             foreground: '#FFFFFF',
-                            DEFAULT: '#6689CB',
+                            DEFAULT: '#222223',
                         },
                         success: '#7FE69C',
                         bordered: '#333',

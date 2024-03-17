@@ -46,7 +46,7 @@ export default function DeleteArticle(props: DeleteArticleProps) {
     }
     return (
         <>
-            <Button size="sm" className="hidden p-0 font-bold md:block bg-zinc-200" onClick={handleClick}>
+            <Button size="sm" color="default" className="hidden p-0 font-bold md:block " onClick={handleClick}>
                 刪除文章
             </Button>
             <div className="block md:hidden" onClick={handleClick}>
@@ -69,10 +69,10 @@ export default function DeleteArticle(props: DeleteArticleProps) {
                                 </div>
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
+                                <Button color="default" variant="light" onPress={onClose}>
                                     取消
                                 </Button>
-                                <Button color="default" onPress={onClose} onClick={handleDeleteIssue}>
+                                <Button color="primary" onPress={onClose} onClick={handleDeleteIssue}>
                                     確定刪除
                                 </Button>
                             </ModalFooter>

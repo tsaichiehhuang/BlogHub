@@ -187,7 +187,7 @@ export default function CreateArticle() {
                                 </div>
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
+                                <Button color="default" variant="light" onPress={onClose}>
                                     取消
                                 </Button>
                                 <Button color="primary" onClick={handleCreateIssue}>
