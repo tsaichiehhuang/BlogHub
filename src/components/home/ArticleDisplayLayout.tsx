@@ -1,7 +1,5 @@
 'use client'
-
-import React, { useState, useEffect, useContext } from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Image, Chip, Divider } from '@nextui-org/react'
+import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 interface label {
     name: string

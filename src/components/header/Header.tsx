@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { cookies } from 'next/headers'
 import IsLogin from '@/components/IsLogin'
 import Logo from './Logo'
-import LogoutButton from '@/components/LogoutButton'
+import LogoutButton from '@/components/header/LogoutButton'
 
 export default function Header() {
     const isLogin = IsLogin()

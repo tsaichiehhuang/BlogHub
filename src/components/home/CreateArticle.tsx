@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Modal,
     ModalContent,
@@ -11,9 +11,7 @@ import {
     Textarea,
     Input,
     Card,
-    CardHeader,
     CardBody,
-    CardFooter,
 } from '@nextui-org/react'
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'

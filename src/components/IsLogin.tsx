@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useState, useEffect, useContext } from 'react'
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from '@nextui-org/react'
-import LoginButton from './LoginButton'
+import LoginButton from './header/LoginButton'
 import { useRouter } from 'next/navigation'
 import { cookies } from 'next/headers'
 

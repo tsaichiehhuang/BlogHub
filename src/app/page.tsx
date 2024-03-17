@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import Header from '@/components/Header'
-import ArticleDisplay from '@/components/ArticleDisplay'
-import AboutMe from '@/components/AboutMe'
-import AddArticle from '@/components/CreateArticle'
+import Header from '@/components/header/Header'
+import ArticleDisplay from '@/components/home/ArticleDisplay'
+import AboutMe from '@/components/home/AboutMe'
+import AddArticle from '@/components/home/CreateArticle'
 import IsLogin from '@/components/IsLogin'
 
 export default function Home() {

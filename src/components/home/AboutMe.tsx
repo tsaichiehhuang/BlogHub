@@ -1,9 +1,6 @@
-import Link from 'next/link'
-import React, { useState, useEffect, useContext } from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Image, Button, Divider } from '@nextui-org/react'
+import { Card, CardHeader, CardBody, CardFooter, Image } from '@nextui-org/react'
 import { MdOutlineEmail } from 'react-icons/md'
 import { BsGithub } from 'react-icons/bs'
-import { useRouter } from 'next/navigation'
 
 export default function AboutMe() {
     return (
@@ -13,9 +10,8 @@ export default function AboutMe() {
                     <Image alt="avatar" src="/avatar.png" width={200} />
                 </div>
                 <div className="  text-black text-[24px] font-bold ">丹尼爾</div>
-                <div className="  text-zinc-700 text-md font-medium ">
-                    丹尼爾是一名工程師，他過往學一些人使用 GitHub Issue 來充當自己的部落格。
-                </div>
+
+                <AboutText />
             </CardHeader>
 
             <CardBody className="text-zinc-700 text-sm md:text-xl gap-4 font-medium  text-center flex-row justify-center items-center">
@@ -24,17 +20,12 @@ export default function AboutMe() {
                     <div className="mt-1 text-black  md:text-[40px] font-bold ">丹尼爾</div>
                 </div>
                 <div className="justify-start items-start flex-col  text-left	">
-                    <div className="mb-1 md:hidden">
-                        丹尼爾是一名工程師，他過往學一些人使用 GitHub Issue 來充當自己的部落格。
+                    <div className="md:hidden">
+                        <AboutText />
                     </div>
-                    <div className="text-xs flex-row flex items-center gap-2">
-                        <MdOutlineEmail />
-                        a0970605512@gmail.com
-                    </div>
-                    <div className="text-xs flex-row flex items-center gap-2">
-                        <BsGithub />
-                        tsaichiehhuang
-                    </div>
+
+                    <ContactInfo icon={<MdOutlineEmail />} text="a0970605512@gmail.com" />
+                    <ContactInfo icon={<BsGithub />} text="tsaichiehhuang" />
                     <div className="md:hidden mt-1 text-xs text-zinc-300"> &copy; 2024 Daniel&apos;s Blog.</div>
                 </div>
             </CardBody>
@@ -43,5 +34,20 @@ export default function AboutMe() {
                 <p className="text-xs  "> &copy; 2024 Daniel&apos;s Blog.</p>
             </CardFooter>
         </Card>
+    )
+}
+function ContactInfo({ icon, text }: { icon: React.ReactNode; text: string }) {
+    return (
+        <div className="text-xs flex-row flex items-center gap-2">
+            {icon}
+            {text}
+        </div>
+    )
+}
+function AboutText() {
+    return (
+        <div className="mb-1 text-zinc-700 text-md font-medium">
+            丹尼爾是一名工程師，他過往學一些人使用 GitHub Issue 來充當自己的部落格。
+        </div>
     )
 }

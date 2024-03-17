@@ -1,4 +1,4 @@
-import Header from '@/components/Header'
+import Header from '@/components/header/Header'
 
 export default async function Layout({ children }: { children: any }) {
     return (

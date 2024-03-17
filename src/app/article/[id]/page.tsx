@@ -1,5 +1,5 @@
 import IsLogin from '@/components/IsLogin'
-import Article from '@/components/Article'
+import Article from '@/components/article/ArticleSquare'
 
 export default function Page({}) {
     return (
