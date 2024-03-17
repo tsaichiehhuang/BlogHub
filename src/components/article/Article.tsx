@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardBody, CardFooter, Image, Divider } from '@nextui-org/react'
+import { Card, CardHeader, CardBody, CardFooter, Image, Divider, Chip } from '@nextui-org/react'
 import { remark } from 'remark'
 import html from 'remark-html'
 import EditArticle from '@/components/article/EditArticle'
@@ -21,21 +21,23 @@ export function Article(props: any) {
             shadow="sm"
             className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-10 p-4 text-left mt-4 max-w-[400px] min-w-[400px]"
         >
-            <CardHeader className="flex flex-col items-start justify-start">
+            <CardHeader className="flex flex-col items-start justify-start gap-4">
                 <div className="flex flex-row justify-between w-full">
-                    <div className="flex flex-col justify-start gap-1 font-medium text-zinc-700 text-tiny md:gap-2 md:justify-center md:items-center md:flex-row">
+                    <div className="flex flex-col justify-start gap-2 font-medium text-zinc-700 text-tiny md:gap-2 md:justify-center md:items-center md:flex-row">
                         發布時間：{formattedCreatedAt}
-                        {issue?.labels?.length !== 0 && <div>|</div>}
-                        {issue?.labels &&
-                            issue.labels.map((label: Label, index: number) => (
-                                <div
-                                    key={index}
-                                    style={{ backgroundColor: `#${label.color}` }}
-                                    className="p-1 rounded-lg text-tiny flex-item text-start"
-                                >
-                                    {label.name}
-                                </div>
-                            ))}
+                        {issue?.labels?.length !== 0 && <div className="md:flex hidden">|</div>}
+                        <div className="flex flex-row gap-1">
+                            {issue?.labels &&
+                                issue.labels.map((label: Label, index: number) => (
+                                    <Chip
+                                        key={index}
+                                        style={{ backgroundColor: `#${label.color}` }}
+                                        className="p-1 rounded-lg text-tiny flex-item text-start"
+                                    >
+                                        {label.name}
+                                    </Chip>
+                                ))}
+                        </div>
                     </div>
 
                     {isLogin && (
