@@ -7,6 +7,7 @@ export async function GET(request: Request, { params }: { params: params }) {
     const number = params.id
     const owner = 'tsaichiehhuang'
     const repo = 'TestBlog'
+
     try {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {

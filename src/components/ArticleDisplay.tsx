@@ -47,7 +47,6 @@ export default function ArticleDisplay() {
             }
         }
     }, [page])
-
     const Loading = () => (
         <Card shadow="sm" className="h-72 space-y-5  p-4 md:pl-8 ">
             <CardHeader className="">
