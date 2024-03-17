@@ -17,7 +17,7 @@ import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
-
+import MarkdownEditor from '@/components/MarkdownEditor'
 interface ValidationError {
     title: string
     body: string
@@ -34,12 +34,10 @@ export default function CreateArticle() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const [selectedLabels, setSelectedLabels] = useState<Array<string>>([])
 
-    const [body, setBody] = useState('')
+    const [body, setBody] = useState('輸入內文')
     const [title, setTitle] = useState('')
     const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
-    const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setBody(e.target.value)
-    }
+
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
     }
@@ -141,7 +139,7 @@ export default function CreateArticle() {
                     />
                 </CardBody>
             </Card>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal size="5xl" isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -156,15 +154,13 @@ export default function CreateArticle() {
                                     onChange={handleTitleChange}
                                     errorMessage={validationError ? validationError.title : ' '}
                                 />
+                                <div className="text-sm">文章內容</div>
+                                <MarkdownEditor body={body} setBody={setBody} />
 
-                                <Textarea
-                                    label="文章內容"
-                                    labelPlacement="outside"
-                                    placeholder="輸入內文"
-                                    value={body}
-                                    onChange={handleBodyChange}
-                                    errorMessage={validationError ? validationError.body : ' '}
-                                />
+                                <div className="text-xs text-danger">
+                                    {validationError ? validationError.body : ' '}
+                                </div>
+
                                 <div className="">
                                     <div className="mb-1 text-sm">選擇標籤</div>
                                     <div className="flex gap-1">

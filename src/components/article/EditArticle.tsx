@@ -15,7 +15,7 @@ import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
 import { Issue } from '@/types'
-
+import MarkdownEditor from '@/components/MarkdownEditor'
 interface EditArticleProps {
     issue: Issue | null
     number: number
@@ -37,9 +37,7 @@ export default function EditArticle(props: EditArticleProps) {
         setBody(issue?.body)
         setTitle(issue?.title)
     }
-    const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setBody(e.target.value)
-    }
+
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
     }
@@ -130,14 +128,34 @@ export default function EditArticle(props: EditArticleProps) {
                                     onChange={handleTitleChange}
                                     errorMessage={validationError ? validationError.title : ' '}
                                 />
-                                <Textarea
+                                <div className="text-sm">文章內容</div>
+                                <MarkdownEditor body={body} setBody={setBody} />
+
+                                {/* <MdEditor
+                                    modelValue={body || ''}
+                                    onChange={setBody}
+                                    language="en-US"
+                                    style={{
+                                        height: '35vh',
+                                        maxHeight: '35vh',
+                                        backgroundColor: '#FAFAFA',
+                                        borderRadius: '10px',
+                                    }}
+                                    previewTheme="default"
+                                    autoDetectCode={true}
+                                    codeTheme="github"
+                                /> */}
+                                <div className="text-xs text-danger">
+                                    {validationError ? validationError.body : ' '}
+                                </div>
+                                {/* <Textarea
                                     label="文章內容"
                                     labelPlacement="outside"
                                     placeholder={issue?.body}
                                     value={body}
                                     onChange={handleBodyChange}
                                     errorMessage={validationError ? validationError.body : ' '}
-                                />
+                                /> */}
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="default" variant="light" onPress={onClose}>
