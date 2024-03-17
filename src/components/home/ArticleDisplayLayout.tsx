@@ -11,9 +11,20 @@ export default function ArticleDisplayLayout(issue: any) {
         router.push(`article/${issue.issue.number}`)
     }
     const createdAtDate = new Date(issue.issue.created_at)
-    const formattedCreatedAt = createdAtDate ? createdAtDate.toLocaleString() : ''
+    const formattedCreatedAt = createdAtDate
+        ? createdAtDate
+              .toLocaleString([], {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+              })
+              .replace(/(\d+)\/(\d+)\/(\d+),/, '$1/$2/$3,')
+        : ''
+
     return (
-        <Card onClick={handleClick} isPressable shadow="sm" className="gap-4 p-4 text-left md:pl-8">
+        <Card onClick={handleClick} isPressable shadow="sm" className="gap-4 p-4 text-left md:pl-8 ">
             <CardHeader className="">
                 <div className="  text-black text-[24px] font-bold">{issue.issue.title}</div>
             </CardHeader>
@@ -25,14 +36,14 @@ export default function ArticleDisplayLayout(issue: any) {
             </CardBody>
 
             <CardFooter className="justify-between">
-                <div className="font-medium text-zinc-700 text-tiny">發布時間：{formattedCreatedAt}</div>
+                <div className="text-xs font-medium text-zinc-500">{formattedCreatedAt}</div>
                 <div className="flex flex-row gap-1">
                     {issue.issue.labels[0] &&
                         issue.issue.labels.map((label: label, index: number) => (
                             <div
                                 key={index}
-                                style={{ backgroundColor: `#${label.color}` }}
-                                className="p-1 rounded-lg text-tiny flex-item text-start"
+                                style={{ borderBottom: `1.5px solid #${label.color}` }}
+                                className="text-[9px]  flex-item text-start"
                             >
                                 {label.name}
                             </div>

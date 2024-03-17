@@ -9,12 +9,7 @@ export default function LogoutButton() {
     }
 
     return (
-        <Button
-            className="m-4 bg-[#222223] font-semibold text-white p-5"
-            radius="full"
-            size="md"
-            onClick={handleLogout}
-        >
+        <Button className="p-5 m-4 font-semibold text-white bg-sky-500" radius="full" size="md" onClick={handleLogout}>
             Logout
         </Button>
     )

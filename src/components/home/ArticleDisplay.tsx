@@ -49,26 +49,29 @@ export default function ArticleDisplay() {
     }, [page])
 
     return (
-        <>
-            {Object.keys(issues).length === 0 ? (
-                error ? (
-                    <Error statusCode={statusCode} />
+        <div className="grid flex-col grid-cols-12 pt-6 bg-gradient-to-r from-white to-sky-100">
+            <div className="col-span-12 py-8 text-3xl font-bold text-center">My Articles</div>
+            <div className="grid grid-cols-1 col-span-10 col-start-2 gap-4 md:grid-cols-3">
+                {Object.keys(issues).length === 0 ? (
+                    error ? (
+                        <Error statusCode={statusCode} />
+                    ) : (
+                        <>
+                            <ArticleDisplayLoading />
+                            <ArticleDisplayLoading />
+                            <ArticleDisplayLoading />
+                        </>
+                    )
                 ) : (
-                    <>
-                        <ArticleDisplayLoading />
-                        <ArticleDisplayLoading />
-                        <ArticleDisplayLoading />
-                    </>
-                )
-            ) : (
-                issues.map((issue: any, index: number) => <ArticleDisplayLayout issue={issue} key={index} />)
-            )}
+                    issues.map((issue: any, index: number) => <ArticleDisplayLayout issue={issue} key={index} />)
+                )}
 
-            {!hasMoreIssues && (
-                <div className="text-gray-400 flex justify-center items-center font-bold text-lg p-9">
-                    - 無更多文章 -
-                </div>
-            )}
-        </>
+                {!hasMoreIssues && (
+                    <div className="flex items-center justify-center text-lg font-bold text-gray-400 p-9">
+                        - 無更多文章 -
+                    </div>
+                )}
+            </div>
+        </div>
     )
 }

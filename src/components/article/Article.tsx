@@ -10,7 +10,17 @@ export function Article(props: any) {
 
     const createdAtDate = issue ? new Date(issue.created_at) : null
 
-    const formattedCreatedAt = createdAtDate ? createdAtDate.toLocaleString() : ''
+    const formattedCreatedAt = createdAtDate
+        ? createdAtDate
+              .toLocaleString([], {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+              })
+              .replace(/(\d+)\/(\d+)\/(\d+),/, '$1/$2/$3,')
+        : ''
     const formatMarkdown = (markdownContent: string) => {
         const result = remark().use(html).processSync(markdownContent)
         return result.toString()
@@ -24,18 +34,20 @@ export function Article(props: any) {
             <CardHeader className="flex flex-col items-start justify-start gap-4">
                 <div className="flex flex-row justify-between w-full">
                     <div className="flex flex-col justify-start gap-2 font-medium text-zinc-700 text-tiny md:gap-2 md:justify-center md:items-center md:flex-row">
-                        發布時間：{formattedCreatedAt}
-                        {issue?.labels?.length !== 0 && <div className="md:flex hidden">|</div>}
+                        {formattedCreatedAt}
+                        {issue?.labels?.length !== 0 && <div className="hidden md:flex">|</div>}
                         <div className="flex flex-row gap-1">
                             {issue?.labels &&
                                 issue.labels.map((label: Label, index: number) => (
-                                    <Chip
+                                    <div
                                         key={index}
-                                        style={{ backgroundColor: `#${label.color}` }}
-                                        className="p-1 rounded-lg text-tiny flex-item text-start"
+                                        style={{ borderBottom: `1.5px solid #${label.color}` }}
+                                        className="text-xs flex-item text-start"
+                                        // style={{ backgroundColor: `#${label.color}` }}
+                                        // className="p-1 rounded-lg text-tiny flex-item text-start"
                                     >
                                         {label.name}
-                                    </Chip>
+                                    </div>
                                 ))}
                         </div>
                     </div>
@@ -52,7 +64,7 @@ export function Article(props: any) {
 
             <CardBody className="mb-2">
                 <article
-                    className="md:leading-loose prose prose-slate max-w-none w-11/12"
+                    className="w-11/12 prose md:leading-loose prose-slate max-w-none"
                     dangerouslySetInnerHTML={{ __html: issue ? formatMarkdown(issue.body) : '' }}
                 ></article>
             </CardBody>

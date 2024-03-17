@@ -126,13 +126,12 @@ export default function CreateArticle() {
     }
     return (
         <>
-            <Card onClick={onOpen} isPressable shadow="sm" className="max-h-[140px] gap-4  p-4 pl-8 text-left ">
+            <Card onClick={onOpen} isPressable shadow="sm" className="w-4/5 max-h-[140px] gap-4  p-2  text-left ">
                 <CardBody className="">
                     <Input
                         key="outside"
-                        label="新增文章"
                         labelPlacement="outside"
-                        placeholder="想發表什麼內容呢？"
+                        placeholder="Hey, Daniel！想發表什麼內容呢？"
                         onChange={handleTitleChange}
                         className="  text-black text-[24px] font-bold"
                         size="lg"

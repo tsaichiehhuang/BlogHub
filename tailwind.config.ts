@@ -6,6 +6,10 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: { 'Noto Sans TC': ['Noto Sans TC'], Pattaya: ['Pattaya'] },
+            // colors: {
+            //     'sky-500': '#78C3FB',
+            // },
+
             minHeight: {
                 56: '14rem',
             },
@@ -28,7 +32,7 @@ module.exports = {
                         foreground: '#11181C',
                         primary: {
                             foreground: '#FFFFFF',
-                            DEFAULT: '#222223',
+                            DEFAULT: '#078BF0',
                         },
                         success: '#7FE69C',
                         bordered: '#333',

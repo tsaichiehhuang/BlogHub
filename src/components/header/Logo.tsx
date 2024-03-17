@@ -12,8 +12,8 @@ export default function Logo() {
         router.push(`/`)
     }
     return (
-        <div onClick={handleClick} className="row-start-2 col-span-12 cursor-pointer">
-            Daniel’s Blog
+        <div onClick={handleClick} className="cursor-pointer  font-Pattaya">
+            Daniel&apos;s Blog
         </div>
     )
 }

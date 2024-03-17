@@ -37,7 +37,7 @@ export default function LoginButton() {
     return (
         <Button
             isLoading={isLoading}
-            className="m-4 bg-[#222223] font-semibold text-white p-5"
+            className="p-5 m-4 font-semibold text-white bg-sky-500"
             radius="full"
             size="md"
             as={Link}
