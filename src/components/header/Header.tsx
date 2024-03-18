@@ -9,7 +9,7 @@ import Logo from './Logo'
 import LogoutButton from '@/components/header/LogoutButton'
 
 export default function Header() {
-    const isLogin = IsLogin()
+    const { isAuthorLogin, isUserLogin } = IsLogin()
 
     return (
         <>
@@ -20,7 +20,7 @@ export default function Header() {
 
                 <NavbarContent justify="end">
                     <NavbarItem className="text-right">
-                        {isLogin ? (
+                        {isAuthorLogin || isUserLogin ? (
                             <div className="flex flex-row items-center">
                                 <div className="font-bold text-md">嗨,丹尼爾</div> <LogoutButton />
                             </div>

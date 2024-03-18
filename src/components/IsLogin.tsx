@@ -1,17 +1,22 @@
-import Link from 'next/link'
-import React, { useState, useEffect, useContext } from 'react'
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from '@nextui-org/react'
-import LoginButton from './header/LoginButton'
-import { useRouter } from 'next/navigation'
 import { cookies } from 'next/headers'
 
 export default function IsLogin() {
-    let isLogin = false
-    if (cookies().get('access_token')) {
-        isLogin = true
+    let isAuthorLogin = false
+    let isUserLogin = false
+    const access_token = cookies().get('access_token')
+    const username = cookies().get('username')
+    const authorName = 'tsaichiehhuang'
+    if (access_token && username.value === authorName) {
+        //有登入、本人
+        isAuthorLogin = true
+    } else if (access_token && username.value !== authorName) {
+        //有登入、非本人
+        isUserLogin = true
     } else {
-        isLogin = false
+        //未登入
+        isAuthorLogin = false
+        isUserLogin = false
     }
 
-    return isLogin
+    return { isAuthorLogin, isUserLogin }
 }

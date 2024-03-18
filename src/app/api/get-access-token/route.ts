@@ -19,7 +19,24 @@ export async function POST(request: Request) {
     )
 
     const data = await res.json()
-    cookies().set('access_token', data.access_token, {
+    const accessToken = data.access_token
+    const userRes = await fetch('https://api.github.com/user', {
+        headers: {
+            Authorization: `token ${accessToken}`,
+        },
+    })
+    const userData = await userRes.json()
+    const username = userData.login
+    const userAvatar = userData.avatar_url
+    cookies().set('access_token', accessToken, {
+        path: '/',
+        maxAge: 8 * 60 * 60,
+    })
+    cookies().set('username', username, {
+        path: '/',
+        maxAge: 8 * 60 * 60,
+    })
+    cookies().set('userAvatar', userAvatar, {
         path: '/',
         maxAge: 8 * 60 * 60,
     })

@@ -6,7 +6,9 @@ import { Issue } from '@/types'
 import { ArticleLoading } from '@/components/article/ArticleLoading'
 
 interface ArticleProps {
-    isLogin: boolean
+    isAuthorLogin: boolean
+    isUserLogin: boolean
+    userAvatar: string
 }
 
 export default function ArticleSquare(props: ArticleProps) {
@@ -15,7 +17,7 @@ export default function ArticleSquare(props: ArticleProps) {
     const [error, setError] = useState<string | null>(null)
     const [statusCode, setStatusCode] = useState<number | null>(null)
     const [number, setNumber] = useState<number | null>(null)
-    const { isLogin } = props
+    const { isAuthorLogin, isUserLogin, userAvatar } = props
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const path = window.location.pathname
@@ -55,7 +57,14 @@ export default function ArticleSquare(props: ArticleProps) {
                     <ArticleLoading />
                 )
             ) : (
-                <Article issue={issue} comments={comments} isLogin={isLogin} number={number} />
+                <Article
+                    userAvatar={userAvatar}
+                    issue={issue}
+                    comments={comments}
+                    isAuthorLogin={isAuthorLogin}
+                    isUserLogin={isUserLogin}
+                    number={number}
+                />
             )}
         </>
     )

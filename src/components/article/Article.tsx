@@ -1,13 +1,13 @@
-import { Card, CardHeader, CardBody, CardFooter, Image, Divider, Chip } from '@nextui-org/react'
+import { Card, CardHeader, CardBody, CardFooter, Image, Divider, Input } from '@nextui-org/react'
 import { remark } from 'remark'
 import html from 'remark-html'
 import EditArticle from '@/components/article/EditArticle'
 import DeleteArticle from '@/components/article/DeleteArticle'
 import { Label, Comment } from '@/types'
+import CreateComment from '@/components/article/CreateComment'
 
 export function Article(props: any) {
-    const { issue, comments, isLogin, number } = props
-
+    const { issue, comments, isAuthorLogin, isUserLogin, number, userAvatar } = props
     const createdAtDate = issue ? new Date(issue.created_at) : null
 
     const formattedCreatedAt = createdAtDate
@@ -52,7 +52,7 @@ export function Article(props: any) {
                         </div>
                     </div>
 
-                    {isLogin && (
+                    {isAuthorLogin && (
                         <div className="flex items-center justify-center gap-4 md:gap-2">
                             <EditArticle issue={issue} number={number as number} />
                             <DeleteArticle issue={issue} number={number as number} />
@@ -94,6 +94,14 @@ export function Article(props: any) {
                                     </div>
                                 ))}
                         </div>
+
+                        {(isAuthorLogin || isUserLogin) && (
+                            <div className="flex flex-row items-start justify-start w-full gap-2 mt-8 ">
+                                <Image src={userAvatar} alt="avatar" width={30} height={30} className="rounded-full" />
+
+                                <CreateComment number={number} />
+                            </div>
+                        )}
                     </CardFooter>
                 </>
             )}

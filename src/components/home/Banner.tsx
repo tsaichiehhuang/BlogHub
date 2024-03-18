@@ -3,6 +3,7 @@ import AddArticle from '@/components/home/CreateArticle'
 import IsLogin from '@/components/IsLogin'
 
 export default function Banner() {
+    const { isAuthorLogin } = IsLogin()
     return (
         <div className="md:py-0 py-8 md:items-baseline items-center justify-around  flex md:grid grid-cols-12 grid-rows-5  flex-col md:flex-row w-full h-[800px] md:h-[500px] bg-gradient-to-r from-white to-sky-100">
             <div
@@ -13,7 +14,7 @@ export default function Banner() {
                 <div className="flex flex-row gap-4">
                     a <div className="text-sky-500">Web Developer</div>
                 </div>
-                {IsLogin() && <AddArticle />}
+                {isAuthorLogin && <AddArticle />}
             </div>
             <div className="hidden col-span-4 col-start-8 row-span-5 row-start-2 md:flex">
                 <Image alt="avatar" src="/avatar_image.png" width={400} />
