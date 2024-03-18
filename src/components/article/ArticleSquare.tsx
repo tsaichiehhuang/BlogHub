@@ -14,35 +14,37 @@ export default function ArticleSquare(props: ArticleProps) {
     const [issue, setIssue] = useState<Issue | null>(null)
     const [error, setError] = useState<string | null>(null)
     const [statusCode, setStatusCode] = useState<number | null>(null)
-
+    const [number, setNumber] = useState<number | null>(null)
     const { isLogin } = props
-    let number: number | null = null
-    if (typeof window !== 'undefined') {
-        const path = window.location.pathname
-        const parts = path.split('/')
-        if (!Number.isNaN(parseInt(parts[parts.length - 1]))) {
-            number = parseInt(parts[parts.length - 1])
-        }
-    }
-
     useEffect(() => {
-        const fetchAnIssue = async (number: number | null) => {
-            try {
-                const response = await fetch(`/api/get-an-issue/${number}`)
-                const data = await response.json()
-                setIssue(data.issue)
-                setComments(data.comments)
-                if (!response.ok) {
-                    setStatusCode(response.status)
-                    return
-                }
-            } catch (error: any) {
-                setError(error.message)
+        if (typeof window !== 'undefined') {
+            const path = window.location.pathname
+            const parts = path.split('/')
+            if (!Number.isNaN(parseInt(parts[parts.length - 1]))) {
+                setNumber(parseInt(parts[parts.length - 1]))
             }
         }
+    }, [])
+    useEffect(() => {
+        if (number !== null) {
+            const fetchAnIssue = async (number: number | null) => {
+                try {
+                    const response = await fetch(`/api/get-an-issue/${number}`)
+                    const data = await response.json()
+                    setIssue(data.issue)
+                    setComments(data.comments)
+                    if (!response.ok) {
+                        setStatusCode(response.status)
+                        return
+                    }
+                } catch (error: any) {
+                    setError(error.message)
+                }
+            }
 
-        fetchAnIssue(number)
-    }, [number, issue?.comments_url])
+            fetchAnIssue(number)
+        }
+    }, [number])
 
     return (
         <>
