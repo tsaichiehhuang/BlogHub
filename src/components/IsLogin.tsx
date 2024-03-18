@@ -6,10 +6,10 @@ export default function IsLogin() {
     const access_token = cookies().get('access_token')
     const username = cookies().get('username')
     const authorName = 'tsaichiehhuang'
-    if (access_token && username.value === authorName) {
+    if (access_token && username?.value === authorName) {
         //有登入、本人
         isAuthorLogin = true
-    } else if (access_token && username.value !== authorName) {
+    } else if (access_token && username?.value !== authorName) {
         //有登入、非本人
         isUserLogin = true
     } else {

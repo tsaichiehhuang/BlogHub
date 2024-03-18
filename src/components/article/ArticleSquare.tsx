@@ -8,7 +8,7 @@ import { ArticleLoading } from '@/components/article/ArticleLoading'
 interface ArticleProps {
     isAuthorLogin: boolean
     isUserLogin: boolean
-    userAvatar: string
+    userAvatar: string | undefined
 }
 
 export default function ArticleSquare(props: ArticleProps) {
