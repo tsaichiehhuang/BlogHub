@@ -16,7 +16,7 @@
 
 ### On GitHub Page
 
-⭐ This Project had deployed on Vercel, you could try it on [**https://blog-hub-blue.vercel.app/**](https://blog-hub-blue.vercel.app/)！
+⭐ This Project had deployed on Vercel, you could try it on [**https://dcard-2024-frontend-intern-homework.vercel.app/**](https://dcard-2024-frontend-intern-homework.vercel.app/)！
 
 ### On Your Computer
 
