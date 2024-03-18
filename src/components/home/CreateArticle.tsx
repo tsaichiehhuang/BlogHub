@@ -126,17 +126,20 @@ export default function CreateArticle() {
     }
     return (
         <>
-            <Card onClick={onOpen} isPressable shadow="sm" className="w-4/5 max-h-[140px] gap-4  p-2  text-left ">
-                <CardBody className="">
-                    <Input
-                        key="outside"
-                        labelPlacement="outside"
-                        placeholder="Hey, Daniel！想發表什麼內容呢？"
-                        onChange={handleTitleChange}
-                        className="  text-black text-[24px] font-bold"
-                        size="lg"
-                    />
-                </CardBody>
+            <Card
+                onClick={onOpen}
+                isPressable
+                shadow="sm"
+                className="w-full md:w-4/5 max-h-[140px] gap-4  p-2  text-left "
+            >
+                <Input
+                    key="outside"
+                    labelPlacement="outside"
+                    placeholder="Hey, Daniel！想發表什麼內容呢？"
+                    onChange={handleTitleChange}
+                    className="  text-black text-[24px] font-bold"
+                    size="lg"
+                />
             </Card>
             <Modal size="5xl" isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
