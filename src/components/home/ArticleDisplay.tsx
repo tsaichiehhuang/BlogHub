@@ -5,6 +5,7 @@ import ArticleDisplayLayout from '@/components/home/ArticleDisplayLayout'
 import Error from '@/components/Error'
 import { Issue } from '@/types'
 import { ArticleDisplayLoading } from '@/components/home/ArticleDisplayLoading'
+import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/react'
 
 export default function ArticleDisplay() {
     const [page, setPage] = useState(1)
@@ -13,7 +14,7 @@ export default function ArticleDisplay() {
     const [error, setError] = useState<string | null>(null)
     const [statusCode, setStatusCode] = useState<number>()
 
-    const perPage = 10
+    const perPage = 8
     const handleScroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = document.documentElement
         if (scrollTop + clientHeight >= scrollHeight - 20) {
@@ -49,12 +50,14 @@ export default function ArticleDisplay() {
     }, [page])
 
     return (
-        <div className="grid flex-col grid-cols-12 pt-6 bg-gradient-to-r from-white to-sky-100">
+        <div data-aos="fade-up" className="grid flex-col grid-cols-12 pt-6 pb-8 bg-gradient-to-r from-white to-sky-100">
             <div className="col-span-12 py-8 text-3xl font-bold text-center">My Articles</div>
             <div className="grid grid-cols-1 col-span-10 col-start-2 gap-4 md:grid-cols-3">
                 {Object.keys(issues).length === 0 ? (
                     error ? (
-                        <Error statusCode={statusCode} />
+                        <div className="col-span-12">
+                            <Error statusCode={statusCode} />
+                        </div>
                     ) : (
                         <>
                             <ArticleDisplayLoading />
@@ -63,7 +66,16 @@ export default function ArticleDisplay() {
                         </>
                     )
                 ) : (
-                    issues.map((issue: any, index: number) => <ArticleDisplayLayout issue={issue} key={index} />)
+                    <>
+                        {issues.map((issue: any, index: number) => (
+                            <ArticleDisplayLayout issue={issue} key={index} />
+                        ))}
+                        {hasMoreIssues && (
+                            <Card isBlurred className="items-center justify-center text-lg font-bold text-gray-400 p-9">
+                                下滑查看更多文章
+                            </Card>
+                        )}
+                    </>
                 )}
 
                 {!hasMoreIssues && (

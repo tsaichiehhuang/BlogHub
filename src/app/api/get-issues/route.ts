@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
     const queryParams = new URLSearchParams(request.url.split('?')[1])
     const page = queryParams.get('page') || '1'
-    const perPage = queryParams.get('perPage') || '10'
+    const perPage = queryParams.get('perPage') || '8'
 
     const owner = 'tsaichiehhuang'
     const repo = 'TestBlog'
