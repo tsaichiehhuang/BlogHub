@@ -47,10 +47,9 @@ export default function ArticleSquare(props: ArticleProps) {
             fetchAnIssue(number)
         }
     }, [number])
-
     return (
         <>
-            {issue === null && number === null ? (
+            {issue === null ? (
                 error ? (
                     <Error statusCode={statusCode} />
                 ) : (
