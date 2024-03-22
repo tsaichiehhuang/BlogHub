@@ -12,11 +12,13 @@ export async function GET(request: Request, { params }: { params: params }) {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {
                 Accept: 'application/json',
+                'X-GitHub-Api-Version': '2022-11-28',
             },
             method: 'GET',
         })
 
         const data = await res.json()
+
         if (!res.ok) {
             const errorMessage =
                 res.status === 404
@@ -26,8 +28,14 @@ export async function GET(request: Request, { params }: { params: params }) {
                     : 'Failed to fetch issue'
             return NextResponse.json({ error: errorMessage }, { status: res.status })
         }
+
         const commentsUrl = data.comments_url
-        const commentsResponse = await fetch(commentsUrl)
+        const commentsResponse = await fetch(commentsUrl, {
+            headers: {
+                Accept: 'application/json',
+            },
+            method: 'GET',
+        })
         const comments = await commentsResponse.json()
 
         return new Response(JSON.stringify({ issue: data, comments: comments }), {

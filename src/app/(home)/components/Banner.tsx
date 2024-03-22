@@ -1,5 +1,5 @@
 import { Image } from '@nextui-org/react'
-import AddArticle from '@/components/home/CreateArticle'
+import AddArticle from '@/app/(home)/components/CreateArticle'
 import IsLogin from '@/components/IsLogin'
 
 export default function Banner() {
@@ -17,10 +17,10 @@ export default function Banner() {
                 {isAuthorLogin && <AddArticle />}
             </div>
             <div className="hidden col-span-4 col-start-8 row-span-5 row-start-2 md:flex">
-                <Image alt="avatar" src="/avatar_image.png" width={400} />
+                <Image alt="avatar" src="/avatar_image.svg" width={400} />
             </div>
 
-            <Image className="flex md:hidden" alt="avatar" src="/avatar_image.png" width={300} />
+            <Image className="flex md:hidden" alt="avatar" src="/avatar_image.webp" width={300} />
         </div>
     )
 }

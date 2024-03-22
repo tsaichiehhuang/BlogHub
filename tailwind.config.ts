@@ -5,11 +5,6 @@ module.exports = {
     content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'],
     theme: {
         extend: {
-            fontFamily: { 'Noto Sans TC': ['Noto Sans TC'], Pattaya: ['Pattaya'] },
-            // colors: {
-            //     'sky-500': '#78C3FB',
-            // },
-
             minHeight: {
                 56: '14rem',
             },

@@ -1,10 +1,10 @@
 import { Card, CardHeader, CardBody, CardFooter, Image, Divider, Input } from '@nextui-org/react'
 import { remark } from 'remark'
 import html from 'remark-html'
-import EditArticle from '@/components/article/EditArticle'
-import DeleteArticle from '@/components/article/DeleteArticle'
+import EditArticle from '@/app/article/components/EditArticle'
+import DeleteArticle from '@/app/article/components/DeleteArticle'
 import { Label, Comment } from '@/types'
-import CreateComment from '@/components/article/CreateComment'
+import CreateComment from '@/app/article/components/CreateComment'
 
 export function Article(props: any) {
     const { issue, comments, isAuthorLogin, isUserLogin, number, userAvatar } = props

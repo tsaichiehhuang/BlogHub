@@ -32,6 +32,7 @@ export async function GET(request: Request) {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, compress, br',
             },
         })
     } catch (error: any) {

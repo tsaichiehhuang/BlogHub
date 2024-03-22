@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import ArticleDisplayLayout from '@/components/home/ArticleDisplayLayout'
+import ArticleDisplayLayout from '@/app/(home)/components/ArticleDisplayLayout'
 import Error from '@/components/Error'
 import { Issue } from '@/types'
-import { ArticleDisplayLoading } from '@/components/home/ArticleDisplayLoading'
-import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/react'
+import { ArticleDisplayLoading } from '@/app/(home)/components/ArticleDisplayLoading'
+import { Card } from '@nextui-org/react'
 
 export default function ArticleDisplay() {
     const [page, setPage] = useState(1)

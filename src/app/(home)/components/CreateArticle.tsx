@@ -8,10 +8,8 @@ import {
     ModalFooter,
     Button,
     useDisclosure,
-    Textarea,
     Input,
     Card,
-    CardBody,
 } from '@nextui-org/react'
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'

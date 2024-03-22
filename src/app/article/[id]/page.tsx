@@ -1,5 +1,5 @@
 import IsLogin from '@/components/IsLogin'
-import ArticleSquare from '@/components/article/ArticleSquare'
+import ArticleSquare from '@/app/article/components/ArticleSquare'
 import { cookies } from 'next/headers'
 
 export default function Page({}) {

@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { Article } from '@/components/article/Article'
+import { Article } from '@/app/article/components/Article'
 import Error from '@/components/Error'
 import { Issue } from '@/types'
-import { ArticleLoading } from '@/components/article/ArticleLoading'
+import { ArticleLoading } from '@/app/article/components/ArticleLoading'
 
 interface ArticleProps {
     isAuthorLogin: boolean

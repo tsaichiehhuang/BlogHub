@@ -1,19 +1,16 @@
 'use client'
-import Link from 'next/link'
-import React, { useState, useEffect, useContext } from 'react'
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from '@nextui-org/react'
-import LoginButton from './LoginButton'
+import { Card } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
-import { cookies } from 'next/headers'
-
+import { Pattaya } from 'next/font/google'
+const pattaya = Pattaya({ weight: '400', subsets: ['latin'], display: 'swap' })
 export default function Logo() {
     const router = useRouter()
     const handleClick = () => {
         router.push(`/`)
     }
     return (
-        <div onClick={handleClick} className="cursor-pointer  font-Pattaya">
+        <Card isPressable shadow="none" isBlurred onClick={handleClick} className={pattaya.className}>
             Daniel&apos;s Blog
-        </div>
+        </Card>
     )
 }
