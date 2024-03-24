@@ -1,19 +1,24 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import ArticleDisplayLayout from '@/app/(home)/components/ArticleDisplayLayout'
-import Error from '@/components/Error'
 import { Issue } from '@/types'
-import { ArticleDisplayLoading } from '@/app/(home)/components/ArticleDisplayLoading'
 import { Card } from '@nextui-org/react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import dynamic from 'next/dynamic'
+const Error = dynamic(() => import('@/components/Error'))
+const ArticleDisplayLoading = dynamic(() => import('@/app/(home)/components/ArticleDisplayLoading'))
+const ArticleDisplayLayout = dynamic(() => import('@/app/(home)/components/ArticleDisplayLayout'))
 
 export default function ArticleDisplay() {
+    useEffect(() => {
+        AOS.init()
+    }, [])
     const [page, setPage] = useState(1)
     const [issues, setIssues] = useState<Issue[]>([])
     const [hasMoreIssues, setHasMoreIssues] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [statusCode, setStatusCode] = useState<number>()
-
     const perPage = 8
     const handleScroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = document.documentElement
@@ -24,7 +29,7 @@ export default function ArticleDisplay() {
 
     useEffect(() => {
         const fetchIssues = async () => {
-            const response = await fetch(`/api/get-issues?page=${page}`)
+            const response = await fetch(`/api/get-issues?page=${page}`, { cache: 'force-cache' })
             const data = await response.json()
             if (!response.ok) {
                 setStatusCode(response.status)

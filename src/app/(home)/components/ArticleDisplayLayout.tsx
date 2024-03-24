@@ -5,12 +5,13 @@ interface label {
     name: string
     color: string
 }
-export default function ArticleDisplayLayout(issue: any) {
+export default function ArticleDisplayLayout(props: any) {
+    const { issue } = props
     const router = useRouter()
     const handleClick = () => {
-        router.push(`article/${issue.issue.number}`)
+        router.push(`article/${issue.number}`)
     }
-    const createdAtDate = new Date(issue.issue.created_at)
+    const createdAtDate = new Date(issue.created_at)
     const formattedCreatedAt = createdAtDate
         ? createdAtDate
               .toLocaleString([], {
@@ -26,20 +27,20 @@ export default function ArticleDisplayLayout(issue: any) {
     return (
         <Card onClick={handleClick} isPressable shadow="sm" className="gap-4 p-4 text-left md:pl-8 ">
             <CardHeader className="">
-                <div className="  text-black text-[24px] font-bold">{issue.issue.title}</div>
+                <div className="  text-black text-[24px] font-bold">{issue.title}</div>
             </CardHeader>
 
             <CardBody className="">
                 <div className="font-medium text-zinc-700 text-md justify-self-start">
-                    {issue.issue.body.substring(0, 80) + '...'}
+                    {issue.body.substring(0, 80) + '...'}
                 </div>
             </CardBody>
 
             <CardFooter className="justify-between">
                 <div className="text-xs font-medium text-zinc-500">{formattedCreatedAt}</div>
                 <div className="flex flex-row gap-1">
-                    {issue.issue.labels[0] &&
-                        issue.issue.labels.map((label: label, index: number) => (
+                    {issue.labels[0] &&
+                        issue.labels.map((label: label, index: number) => (
                             <div
                                 key={index}
                                 style={{ borderBottom: `1.5px solid #${label.color}` }}

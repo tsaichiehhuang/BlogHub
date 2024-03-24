@@ -21,3 +21,7 @@ export interface Label {
     name: string
     color: string
 }
+export interface ValidationError {
+    title: string
+    body: string
+}

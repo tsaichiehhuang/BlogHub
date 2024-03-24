@@ -10,7 +10,6 @@ module.exports = {
             },
         },
     },
-    darkMode: 'class',
     plugins: [
         require('@tailwindcss/typography'),
         nextui({
@@ -27,22 +26,11 @@ module.exports = {
                         foreground: '#11181C',
                         primary: {
                             foreground: '#FFFFFF',
-                            DEFAULT: '#078BF0',
+                            DEFAULT: '#2563eb',
                         },
                         success: '#7FE69C',
                         bordered: '#333',
                         warning: { DEFAULT: '#F2A660', foreground: '#000000' },
-                    },
-                },
-                dark: {
-                    layout: {},
-                    colors: {
-                        background: '#171E28',
-                        foreground: '#ECEDEE',
-                        primary: {
-                            foreground: '#FFFFFF',
-                            DEFAULT: '#6689CB',
-                        },
                     },
                 },
             },

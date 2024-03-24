@@ -4,15 +4,16 @@ export async function GET(request: Request) {
     const queryParams = new URLSearchParams(request.url.split('?')[1])
     const page = queryParams.get('page') || '1'
     const perPage = queryParams.get('perPage') || '8'
+    const owner = process.env.NEXT_PUBLIC_GITHUB_OWER_NAME
+    const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
 
-    const owner = 'tsaichiehhuang'
-    const repo = 'TestBlog'
     try {
         const res = await fetch(
             `https://api.github.com/repos/${owner}/${repo}/issues?page=${page}&per_page=${perPage}`,
             {
                 headers: {
                     Accept: 'application/json',
+                    // 'Accept-Encoding': 'gzip, compress, br',
                 },
                 method: 'GET',
             }
@@ -32,7 +33,7 @@ export async function GET(request: Request) {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
-                'Accept-Encoding': 'gzip, compress, br',
+                // 'Content-Encoding': 'gzip',
             },
         })
     } catch (error: any) {

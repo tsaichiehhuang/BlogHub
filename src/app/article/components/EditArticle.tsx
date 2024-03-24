@@ -8,22 +8,18 @@ import {
     ModalFooter,
     Button,
     useDisclosure,
-    Textarea,
     Input,
 } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
-import { Issue } from '@/types'
+import { Issue, ValidationError } from '@/types'
 import MarkdownEditor from '@/components/MarkdownEditor'
 interface EditArticleProps {
     issue: Issue | null
     number: number
 }
-interface ValidationError {
-    title: string
-    body: string
-}
+
 export default function EditArticle(props: EditArticleProps) {
     const { issue, number } = props
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -48,8 +44,10 @@ export default function EditArticle(props: EditArticleProps) {
         })
 
         await validationSchema.validate({ title, body }, { abortEarly: false })
-        const owner = 'tsaichiehhuang'
-        const repo = 'TestBlog'
+
+        const owner = process.env.NEXT_PUBLIC_GITHUB_OWER_NAME
+        const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
+        console.log(owner, repo)
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {
                 Accept: 'application/vnd.github+json',
@@ -99,7 +97,7 @@ export default function EditArticle(props: EditArticleProps) {
             <Button
                 size="sm"
                 color="primary"
-                className="hidden p-0 font-bold text-white  md:block"
+                className="hidden p-0 font-bold text-white md:block"
                 onClick={handleClick}
             >
                 <div>編輯文章</div>
@@ -131,31 +129,9 @@ export default function EditArticle(props: EditArticleProps) {
                                 <div className="text-sm">文章內容</div>
                                 <MarkdownEditor body={body} setBody={setBody} />
 
-                                {/* <MdEditor
-                                    modelValue={body || ''}
-                                    onChange={setBody}
-                                    language="en-US"
-                                    style={{
-                                        height: '35vh',
-                                        maxHeight: '35vh',
-                                        backgroundColor: '#FAFAFA',
-                                        borderRadius: '10px',
-                                    }}
-                                    previewTheme="default"
-                                    autoDetectCode={true}
-                                    codeTheme="github"
-                                /> */}
                                 <div className="text-xs text-danger">
                                     {validationError ? validationError.body : ' '}
                                 </div>
-                                {/* <Textarea
-                                    label="文章內容"
-                                    labelPlacement="outside"
-                                    placeholder={issue?.body}
-                                    value={body}
-                                    onChange={handleBodyChange}
-                                    errorMessage={validationError ? validationError.body : ' '}
-                                /> */}
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="default" variant="light" onPress={onClose}>

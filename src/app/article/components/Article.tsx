@@ -1,12 +1,13 @@
-import { Card, CardHeader, CardBody, CardFooter, Image, Divider, Input } from '@nextui-org/react'
+import { Card, CardHeader, CardBody, CardFooter, Image, Divider } from '@nextui-org/react'
 import { remark } from 'remark'
 import html from 'remark-html'
+import { Label, Comment } from '@/types'
 import EditArticle from '@/app/article/components/EditArticle'
 import DeleteArticle from '@/app/article/components/DeleteArticle'
-import { Label, Comment } from '@/types'
-import CreateComment from '@/app/article/components/CreateComment'
+import dynamic from 'next/dynamic'
+const CreateComment = dynamic(() => import('@/app/article/components/CreateComment'))
 
-export function Article(props: any) {
+export default function Article(props: any) {
     const { issue, comments, isAuthorLogin, isUserLogin, number, userAvatar } = props
     const createdAtDate = issue ? new Date(issue.created_at) : null
 
@@ -43,8 +44,6 @@ export function Article(props: any) {
                                         key={index}
                                         style={{ borderBottom: `1.5px solid #${label.color}` }}
                                         className="text-xs flex-item text-start"
-                                        // style={{ backgroundColor: `#${label.color}` }}
-                                        // className="p-1 rounded-lg text-tiny flex-item text-start"
                                     >
                                         {label.name}
                                     </div>
@@ -94,16 +93,15 @@ export function Article(props: any) {
                                     </div>
                                 ))}
                         </div>
-
-                        {(isAuthorLogin || isUserLogin) && (
-                            <div className="flex flex-row items-start justify-start w-full gap-2 mt-8 ">
-                                <Image src={userAvatar} alt="avatar" width={30} height={30} className="rounded-full" />
-
-                                <CreateComment number={number} />
-                            </div>
-                        )}
                     </CardFooter>
                 </>
+            )}
+            {(isAuthorLogin || isUserLogin) && (
+                <CardFooter className="flex flex-row items-start justify-start w-full gap-2">
+                    <Image src={userAvatar} alt="avatar" width={30} height={30} className="rounded-full" />
+
+                    <CreateComment number={number} />
+                </CardFooter>
             )}
         </Card>
     )

@@ -16,14 +16,8 @@ import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
 import MarkdownEditor from '@/components/MarkdownEditor'
-interface ValidationError {
-    title: string
-    body: string
-}
-interface label {
-    name: string
-    color: string
-}
+import { Label, ValidationError } from '@/types'
+
 export default function CreateArticle() {
     const token = Cookies.get('access_token')
     const octokit = new Octokit({
@@ -31,7 +25,6 @@ export default function CreateArticle() {
     })
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const [selectedLabels, setSelectedLabels] = useState<Array<string>>([])
-
     const [body, setBody] = useState('輸入內文')
     const [title, setTitle] = useState('')
     const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
@@ -113,7 +106,7 @@ export default function CreateArticle() {
         { name: 'hot', color: 'F9D0C4' },
         { name: 'practice', color: 'C5DEF5' },
     ]
-    const handleLabelChoose = (label: label) => {
+    const handleLabelChoose = (label: Label) => {
         const newSelectedLabels = [...selectedLabels]
         if (newSelectedLabels.includes(label.name)) {
             newSelectedLabels.splice(newSelectedLabels.indexOf(label.name), 1)

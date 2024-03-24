@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { Button } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 
@@ -16,7 +16,7 @@ export default function LoginButton() {
 
     useEffect(() => {
         const url = window.location.href
-        const hasCode = url.includes('?code=') // 判斷是否有 code 參數
+        const hasCode = url.includes('?code=')
 
         if (hasCode) {
             ;(async () => {
@@ -37,13 +37,13 @@ export default function LoginButton() {
     return (
         <Button
             isLoading={isLoading}
-            className="p-5 m-4 font-semibold text-white bg-sky-500"
+            className="p-5 m-4 font-semibold text-white bg-blue-600"
             radius="full"
             size="md"
             as={Link}
             href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_SITE_URL}/login&scope=project%20repo%20issues:write`}
         >
-            Continue with GitHub
+            Login with GitHub
         </Button>
     )
 }

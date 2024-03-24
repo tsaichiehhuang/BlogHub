@@ -5,10 +5,12 @@ export default function Error(props: any) {
 
     const ErrorMessage = () => {
         if (statusCode === 404) {
-            ;<>
-                <Image alt="avatar" src="/Hands Folder Error.png" width={200} />
-                <div className="text-red-500 text-center font-bold mt-4 text-xl">找不到資料 </div>
-            </>
+            return (
+                <>
+                    <Image alt="avatar" src="/Hands Folder Error.png" width={200} />
+                    <div className="text-red-500 text-center font-bold mt-4 text-xl">找不到資料 </div>
+                </>
+            )
         } else if (statusCode === 403) {
             return (
                 <>

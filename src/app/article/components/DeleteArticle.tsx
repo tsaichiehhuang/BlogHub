@@ -3,7 +3,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import Swal from 'sweetalert2'
-import { Issue, Label } from '@/types'
+import { Issue } from '@/types'
 
 interface DeleteArticleProps {
     issue: Issue | null
@@ -21,8 +21,8 @@ export default function DeleteArticle(props: DeleteArticleProps) {
     }
 
     const handleDeleteIssue = async () => {
-        const owner = 'tsaichiehhuang'
-        const repo = 'TestBlog'
+        const owner = process.env.NEXT_PUBLIC_GITHUB_OWER_NAME
+        const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {
                 Accept: 'application/vnd.github+json',

@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { Article } from '@/app/article/components/Article'
 import Error from '@/components/Error'
 import { Issue } from '@/types'
 import { ArticleLoading } from '@/app/article/components/ArticleLoading'
-
+import dynamic from 'next/dynamic'
+const Article = dynamic(() => import('@/app/article/components/Article'))
 interface ArticleProps {
     isAuthorLogin: boolean
     isUserLogin: boolean
@@ -31,7 +31,7 @@ export default function ArticleSquare(props: ArticleProps) {
         if (number !== null) {
             const fetchAnIssue = async (number: number | null) => {
                 try {
-                    const response = await fetch(`/api/get-an-issue/${number}`)
+                    const response = await fetch(`/api/get-an-issue/${number}`, { cache: 'force-cache' })
                     const data = await response.json()
                     setIssue(data.issue)
                     setComments(data.comments)
