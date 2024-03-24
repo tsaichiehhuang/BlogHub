@@ -1,6 +1,6 @@
 # Dcard 2024 Frontend Intern Homework
 
-💻 A React app built with Next.js that connects to the GitHub REST API to increase the visibility of articles written in GitHub issues!
+💻 A web app built with Next.js that connects to the GitHub REST API to increase the visibility of articles written in GitHub issues!
 
 ⭐ 3 main functions:
 
@@ -29,10 +29,20 @@ git clone https://github.com/tsaichiehhuang/BlogHub.git
 2. Change directories to this repository via `cd` or drag this folder and drop in terminal
 
 ```shell
-cd Dcard-2024-Web-Frontend-Intern-Homework
+cd BlogHub
 ```
 
-3. Run this React app
+3. Register an OAuth app on GitHub, and paste your client id , client secret in and call back URL .env file.
+
+```shell
+NEXT_PUBLIC_CLIENT_ID=
+NEXT_PUBLIC_CLIENT_SECRET=
+NEXT_PUBLIC_SITE_URL=
+GITHUB_OWER_NAME=
+GITHUB_REPO_NAME=
+```
+
+4.  Run this React app
 
 ```shell
 npm install
