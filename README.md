@@ -1,4 +1,4 @@
-# Dcard 2024 Frontend Intern Homework
+# BlogHub
 
 💻 A web app built with Next.js that connects to the GitHub REST API to increase the visibility of articles written in GitHub issues!
 
@@ -16,7 +16,7 @@
 
 ### On GitHub Page
 
-⭐ This Project had deployed on Vercel, you could try it on [**https://dcard-2024-frontend-intern-homework.vercel.app/**](https://dcard-2024-frontend-intern-homework.vercel.app/)！
+⭐ This Project had deployed on Vercel, you could try it on [**https://my-blog-hub.vercel.app/**](https://my-blog-hub.vercel.app/)！
 
 ### On Your Computer
 
