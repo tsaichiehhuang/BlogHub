@@ -21,8 +21,8 @@ export default function DeleteArticle(props: DeleteArticleProps) {
     }
 
     const handleDeleteIssue = async () => {
-        const owner = process.env.NEXT_PUBLIC_GITHUB_OWNER_NAME
-        const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
+        const owner = 'tsaicheihhuang'
+        const repo = 'TestBlog'
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {
                 Accept: 'application/vnd.github+json',
