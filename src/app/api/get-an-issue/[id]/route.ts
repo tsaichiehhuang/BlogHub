@@ -6,17 +6,20 @@ interface params {
 export async function GET(request: Request, { params }: { params: params }) {
     const number = params.id
 
-    const owner = process.env.NEXT_PUBLIC_GITHUB_OWNER_NAME
-    const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
+    // const owner = process.env.NEXT_PUBLIC_GITHUB_OWNER_NAME
+    // const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
 
     try {
-        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
-            headers: {
-                Accept: 'application/json',
-                'X-GitHub-Api-Version': '2022-11-28',
-            },
-            method: 'GET',
-        })
+        const res = await fetch(
+            `https://api.github.com/repos/${process.env.NEXT_PUBLIC_GITHUB_OWNER_NAME}/${process.env.NEXT_PUBLIC_GITHUB_REPO_NAME}/issues/${number}`,
+            {
+                headers: {
+                    Accept: 'application/json',
+                    'X-GitHub-Api-Version': '2022-11-28',
+                },
+                method: 'GET',
+            }
+        )
 
         const data = await res.json()
 
