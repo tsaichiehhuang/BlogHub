@@ -21,7 +21,7 @@ export default function DeleteArticle(props: DeleteArticleProps) {
     }
 
     const handleDeleteIssue = async () => {
-        const owner = 'tsaicheihhuang'
+        const owner = 'tsaichiehhuang'
         const repo = 'TestBlog'
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
             headers: {
