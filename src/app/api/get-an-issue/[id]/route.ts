@@ -6,7 +6,7 @@ interface params {
 export async function GET(request: Request, { params }: { params: params }) {
     const number = params.id
 
-    const owner = process.env.NEXT_PUBLIC_GITHUB_OWER_NAME
+    const owner = process.env.NEXT_PUBLIC_GITHUB_OWNER_NAME
     const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
 
     try {
