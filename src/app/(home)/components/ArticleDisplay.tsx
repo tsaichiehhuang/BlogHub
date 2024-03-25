@@ -29,7 +29,7 @@ export default function ArticleDisplay() {
 
     useEffect(() => {
         const fetchIssues = async () => {
-            const response = await fetch(`/api/get-issues?page=${page}`, { cache: 'force-cache' })
+            const response = await fetch(`/api/get-issues?page=${page}`, { cache: 'no-cache' })
             const data = await response.json()
             if (!response.ok) {
                 setStatusCode(response.status)

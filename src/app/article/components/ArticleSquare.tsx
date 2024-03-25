@@ -30,26 +30,24 @@ export default function ArticleSquare(props: ArticleProps) {
     useEffect(() => {
         if (number !== null) {
             const fetchAnIssue = async (number: number | null) => {
-                try {
-                    const response = await fetch(`/api/get-an-issue/${number}`, { cache: 'force-cache' })
-                    const data = await response.json()
-                    setIssue(data.issue)
-                    setComments(data.comments)
-                    if (!response.ok) {
-                        setStatusCode(response.status)
-                        return
-                    }
-                } catch (error: any) {
-                    setError(error.message)
+                const response = await fetch(`/api/get-an-issue/${number}`, { cache: 'no-cache' })
+                const data = await response.json()
+                setIssue(data.issue)
+                setComments(data.comments)
+                if (!response.ok) {
+                    setStatusCode(response.status)
+                    setError(response.statusText)
                 }
             }
 
             fetchAnIssue(number)
         }
     }, [number])
+    console.log('issue', issue)
+    console.log('error', error)
     return (
         <>
-            {issue === null ? (
+            {issue === undefined || null ? (
                 error ? (
                     <Error statusCode={statusCode} />
                 ) : (

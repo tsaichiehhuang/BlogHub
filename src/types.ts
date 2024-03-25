@@ -22,6 +22,7 @@ export interface Label {
     color: string
 }
 export interface ValidationError {
-    title: string
-    body: string
+    title?: string
+    body?: string
+    comment?: string
 }

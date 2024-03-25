@@ -86,7 +86,7 @@ export default function Article(props: any) {
                                             height={30}
                                             className="rounded-full"
                                         />
-                                        <div className="flex flex-col gap-1 p-3 bg-gray-100 rounded-3xl">
+                                        <div className="flex flex-col gap-1 p-3 bg-gray-100 rounded-3xl max-w-xl">
                                             <p className="text-xs font-bold">{comment.user.login}</p>
                                             {comment.body}
                                         </div>

@@ -27,6 +27,7 @@ export default function EditArticle(props: EditArticleProps) {
     const [body, setBody] = useState(issue?.body)
     const [title, setTitle] = useState(issue?.title)
     const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
+    const [isDisabled, setIsDisabled] = useState(true)
 
     const handleClick = () => {
         onOpen()
@@ -54,6 +55,7 @@ export default function EditArticle(props: EditArticleProps) {
             },
             method: 'PATCH',
             body: JSON.stringify({ title: title, body: body }),
+            cache: 'no-cache',
         })
         if (res.status === 200) {
             Swal.fire({
@@ -66,6 +68,13 @@ export default function EditArticle(props: EditArticleProps) {
             setTimeout(() => {
                 location.reload()
             }, 3000)
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: '編輯文章時出錯',
+                text: '抱歉，無法完成文章的編輯。請稍後再試。',
+                confirmButtonText: '確定',
+            })
         }
     }
     useEffect(() => {
@@ -91,6 +100,7 @@ export default function EditArticle(props: EditArticleProps) {
         }
         validateBody()
     }, [body])
+
     return (
         <>
             <Button
@@ -136,7 +146,12 @@ export default function EditArticle(props: EditArticleProps) {
                                 <Button color="default" variant="light" onPress={onClose}>
                                     取消
                                 </Button>
-                                <Button color="primary" onPress={onClose} onClick={handleEditIssue}>
+                                <Button
+                                    color="primary"
+                                    onPress={onClose}
+                                    onClick={handleEditIssue}
+                                    isDisabled={validationError.title !== '' || validationError.body !== ''}
+                                >
                                     確定新增
                                 </Button>
                             </ModalFooter>

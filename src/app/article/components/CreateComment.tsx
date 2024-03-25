@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Modal,
     ModalContent,
@@ -14,6 +14,8 @@ import {
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
 import Swal from 'sweetalert2'
+import * as Yup from 'yup'
+import { ValidationError } from '@/types'
 
 export default function CreateComment(props: any) {
     const { number } = props
@@ -22,13 +24,18 @@ export default function CreateComment(props: any) {
         auth: `${token}`,
     })
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const [comment, setComment] = useState('輸入內文')
+    const [comment, setComment] = useState('')
+    const [validationError, setValidationError] = useState<ValidationError>({ comment: '' })
 
     const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setComment(e.target.value)
     }
     const handleCreateComment = async () => {
         try {
+            const validationSchema = Yup.object().shape({
+                comment: Yup.string().required('留言不能為空'),
+            })
+            await validationSchema.validate({ comment }, { abortEarly: false })
             const res = await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
                 owner: 'tsaichiehhuang',
                 repo: 'TestBlog',
@@ -52,10 +59,22 @@ export default function CreateComment(props: any) {
                 })
             }
         } catch (error: any) {
+            setValidationError(error.message)
+
             console.error('Error creating issue:', error)
         }
     }
-
+    useEffect(() => {
+        const validateComment = async () => {
+            try {
+                await Yup.string().required('留言不能為空').validate(comment)
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, comment: '' }))
+            } catch (error: any) {
+                setValidationError((prevErrors: ValidationError) => ({ ...prevErrors, comment: error.message }))
+            }
+        }
+        validateComment()
+    }, [comment])
     return (
         <>
             <Input
@@ -79,13 +98,18 @@ export default function CreateComment(props: any) {
                                     labelPlacement="outside"
                                     placeholder="輸入留言..."
                                     onChange={handleCommentChange}
+                                    errorMessage={validationError ? validationError.comment : ' '}
                                 />
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="default" variant="light" onPress={onClose}>
                                     取消
                                 </Button>
-                                <Button color="primary" onClick={handleCreateComment}>
+                                <Button
+                                    color="primary"
+                                    onClick={handleCreateComment}
+                                    isDisabled={validationError.comment !== ''}
+                                >
                                     確定留言
                                 </Button>
                             </ModalFooter>

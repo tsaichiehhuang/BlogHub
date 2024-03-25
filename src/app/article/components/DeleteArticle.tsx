@@ -30,6 +30,7 @@ export default function DeleteArticle(props: DeleteArticleProps) {
             },
             method: 'PATCH',
             body: JSON.stringify({ state: 'closed' }),
+            cache: 'no-cache',
         })
         if (res.status === 200) {
             Swal.fire({
@@ -42,6 +43,13 @@ export default function DeleteArticle(props: DeleteArticleProps) {
             setTimeout(() => {
                 router.push('/')
             }, 3000)
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: '刪除文章時出錯',
+                text: '抱歉，無法完成文章的刪除。請稍後再試。',
+                confirmButtonText: '確定',
+            })
         }
     }
     return (

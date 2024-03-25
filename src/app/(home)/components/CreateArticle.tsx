@@ -63,6 +63,13 @@ export default function CreateArticle() {
                 setTimeout(() => {
                     location.reload(), 5000
                 })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '發布文章時出錯',
+                    text: '抱歉，無法完成文章的發布。請稍後再試。',
+                    confirmButtonText: '確定',
+                })
             }
         } catch (error: any) {
             if (error.name === 'ValidationError') {
@@ -179,7 +186,11 @@ export default function CreateArticle() {
                                 <Button color="default" variant="light" onPress={onClose}>
                                     取消
                                 </Button>
-                                <Button color="primary" onClick={handleCreateIssue}>
+                                <Button
+                                    color="primary"
+                                    onClick={handleCreateIssue}
+                                    isDisabled={validationError.title !== '' || validationError.body !== ''}
+                                >
                                     確定新增
                                 </Button>
                             </ModalFooter>

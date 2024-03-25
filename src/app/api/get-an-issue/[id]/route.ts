@@ -16,6 +16,7 @@ export async function GET(request: Request, { params }: { params: params }) {
                 'X-GitHub-Api-Version': '2022-11-28',
             },
             method: 'GET',
+            cache: 'no-cache',
         })
 
         const data = await res.json()
@@ -36,6 +37,7 @@ export async function GET(request: Request, { params }: { params: params }) {
                 Accept: 'application/json',
             },
             method: 'GET',
+            cache: 'no-cache',
         })
         const comments = await commentsResponse.json()
 

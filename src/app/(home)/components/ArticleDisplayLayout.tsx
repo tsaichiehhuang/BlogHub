@@ -1,10 +1,8 @@
 'use client'
 import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
-interface label {
-    name: string
-    color: string
-}
+import { Label } from '@/types'
+
 export default function ArticleDisplayLayout(props: any) {
     const { issue } = props
     const router = useRouter()
@@ -40,7 +38,7 @@ export default function ArticleDisplayLayout(props: any) {
                 <div className="text-xs font-medium text-zinc-500">{formattedCreatedAt}</div>
                 <div className="flex flex-row gap-1">
                     {issue.labels[0] &&
-                        issue.labels.map((label: label, index: number) => (
+                        issue.labels.map((label: Label, index: number) => (
                             <div
                                 key={index}
                                 style={{ borderBottom: `1.5px solid #${label.color}` }}

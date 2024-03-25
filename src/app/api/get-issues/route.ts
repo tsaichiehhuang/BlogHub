@@ -14,6 +14,7 @@ export async function GET(request: Request) {
                     Accept: 'application/json',
                 },
                 method: 'GET',
+                cache: 'no-cache',
             }
         )
 
