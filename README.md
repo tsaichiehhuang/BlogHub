@@ -35,8 +35,8 @@ cd BlogHub
 3. Register an OAuth app on GitHub, and paste your client id , client secret in and call back URL .env file.
 
 ```shell
-NEXT_PUBLIC_CLIENT_ID=
-NEXT_PUBLIC_CLIENT_SECRET=
+NEXT_PUBLIC_GITHUB_CLIENT_ID=
+NEXT_PUBLIC_GITHUB_CLIENT_SECRET=
 NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_GITHUB_OWNER_NAME=
 NEXT_PUBLIC_GITHUB_REPO_NAME=

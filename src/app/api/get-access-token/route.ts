@@ -6,8 +6,8 @@ export async function POST(request: Request) {
     const res = await fetch(
         `https://github.com/login/oauth/access_token?${new URLSearchParams({
             code,
-            client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
-            client_secret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+            client_id: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
+            client_secret: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET,
             scope: 'repo,issues:write',
         })}`,
         {
