@@ -45,7 +45,7 @@ export default function EditArticle(props: EditArticleProps) {
 
         await validationSchema.validate({ title, body }, { abortEarly: false })
 
-        const owner = process.env.NEXT_PUBLIC_GITHUB_OWER_NAME
+        const owner = process.env.NEXT_PUBLIC_GITHUB_OWNER_NAME
         const repo = process.env.NEXT_PUBLIC_GITHUB_REPO_NAME
         console.log(owner, repo)
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, {
