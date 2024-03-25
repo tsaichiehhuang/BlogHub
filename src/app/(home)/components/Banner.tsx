@@ -6,7 +6,7 @@ const CreateArticle = dynamic(() => import('@/app/(home)/components/CreateArticl
 
 export default function Banner() {
     const { isAuthorLogin } = IsLogin()
-    console.log(process.env.NEXT_PUBLIC_GITHUB_OWNER_NAME, process.env.NEXT_PUBLIC_GITHUB_REPO_NAME)
+
     return (
         <div className="md:py-0 py-8 md:items-baseline items-center justify-around  flex md:grid grid-cols-12 grid-rows-5  flex-col md:flex-row w-full h-[800px] md:h-[500px] bg-gradient-to-r from-white to-sky-100">
             <div className="flex flex-col col-span-5 col-start-3 row-start-3 gap-8 text-3xl font-bold md:gap-4 md:text-5xl align-center">
