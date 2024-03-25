@@ -41,7 +41,7 @@ export default function LoginButton() {
             radius="full"
             size="md"
             as={Link}
-            href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_SITE_URL}/login&scope=project%20repo%20issues:write`}
+            href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_SITE_URL}login&scope=project%20repo%20issues:write`}
         >
             Login with GitHub
         </Button>
