@@ -86,12 +86,15 @@ This project uses three main packages:
 
 -   home page to show Dainel's intro and articles
 -   also add `AOS scroll animate library` to add visual effect when scroll
-
-      <img width="500" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/924c561f-41fe-4175-b7e3-302a56a0c3eb">
-
 -   list issues with `Infinite Scroll` from GitHub REST API
+
+|                                                                                                                                        |                                                                                                                                     |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| <img width="600" alt="home-gif" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/82f57486-2fe8-4c83-8ce7-cd583b74de86"> | <img width="300" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/924c561f-41fe-4175-b7e3-302a56a0c3eb"> |
+
 -   After logging in, the system will determine whether the user is the author of the post, if yes, the user can create posts.
     #### 📌 Create Post
+    <img width="600" alt="發布文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/ef715503-e186-4d0c-b444-65e02d83ae6d">
 
 #### (2) Article
 
@@ -99,10 +102,18 @@ This project uses three main packages:
     <img width="500" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/14ff98c8-77b3-434a-b737-e314e2a78809">
 
 -   After logging in, the system will determine whether the user is the author of the post.
+
     -   If yes: the user can edit, delete posts, and create comments.
     -   If not: the user can only create comments.
+
     #### 📌 Edit Post
+
+    <img width="600" alt="編輯文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/24ed002f-2d8c-45bf-a70b-b07f4b6b5c9a">
+
     #### 📌 Delete Post
+
+    <img width="600" alt="刪除文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/7252d78d-1da0-46f6-86a9-658d977fefba">
+
     #### 📌 Create Comment
 
 ### 【Components】
