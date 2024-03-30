@@ -1,8 +1,8 @@
 import { Card, Skeleton } from '@nextui-org/react'
 
-export function ArticleLoading() {
+export default function ArticleLoading() {
     return (
-        <Card shadow="sm" className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-10 p-4 text-left mt-4">
+        <Card shadow="sm" className="w-full md:min-w-[960px] md:max-w-[960px] gap-4  md:p-10 p-4 text-left mt-4">
             <Skeleton className="rounded-lg">
                 <div className="h-24 rounded-lg bg-default-300"></div>
             </Skeleton>

@@ -6,9 +6,7 @@
 
 -   list issues with `Infinite Scroll` from GitHub REST API
 -   read issue's detail (title, content, labels, comments) from GitHub REST API
--   Implement creating, editing, and deleting articles using the GitHub REST API
-
-## DEMO
+-   Implement creating, editing, deleting articles and creating, deleting comment using the GitHub REST API
 
 ## Overview
 
@@ -103,7 +101,7 @@ This project uses three main packages:
 
 -   After logging in, the system will determine whether the user is the author of the post.
 
-    -   If yes: the user can edit, delete posts, and create comments.
+    -   If yes: the user can edit, delete posts, create comments and delete comment.
     -   If not: the user can only create comments.
 
     #### 📌 Edit Post
@@ -115,6 +113,12 @@ This project uses three main packages:
     <img width="600" alt="刪除文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/7252d78d-1da0-46f6-86a9-658d977fefba">
 
     #### 📌 Create Comment
+
+    <img width="600" alt="創建留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/13730a99-466e-42ed-8675-c7ee78271171">
+
+    #### 📌 Delete Comment
+
+    <img width="600" alt="刪除留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/aafeaeea-cd91-4388-818b-e1058425c15f">
 
 ### 【Components】
 
@@ -142,18 +146,19 @@ Thanks to the combination of TailwindCSS and NextUI, our React app can seamlessl
 -   Omit the self-introduction image.
 -   Replace the edit/delete buttons for articles with icons.
 
+    <img width="150" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/f33d19a5-e97c-4580-b6fb-457a74dc86d6">
+
 ### ✅ Error Handling
 
 -   When fetch API, display the corresponding icon and information if there is an error response.
 -   Functions such as publishing and editing articles will also provide error responses when there are API call errors.
 
-    <img width="300" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/5e29c52e-cc6a-4777-a639-9a205886e7f8">
+    <img width="600" alt="錯誤訊息" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/6a36806c-5ec7-4bfc-9510-01a56759f31c">
 
 ### ✅ Skeleton Screen Loading
 
 -   Before data loading, utilize placeholders in the form of colored blocks to present the page structure and data positions to the user.
 -   Create an anticipation of content "about to appear" rather than focusing entirely on "waiting time", **optimizing the user experience**!
--
 
 ### ✅ Web Vitals
 

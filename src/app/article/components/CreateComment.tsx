@@ -49,13 +49,19 @@ export default function CreateComment(props: any) {
             if (res.status === 201) {
                 Swal.fire({
                     icon: 'success',
-                    title: '文章發表成功',
-                    text: '您的文章已成功發布。',
+                    title: '留言發表成功',
                     confirmButtonText: '確定',
-                    timer: 5000,
+                    timer: 3000,
                 })
                 setTimeout(() => {
-                    location.reload(), 5000
+                    window.location.reload()
+                }, 3000)
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '留言發布錯誤',
+                    text: '抱歉，無法留言。',
+                    confirmButtonText: '確定',
                 })
             }
         } catch (error: any) {

@@ -1,20 +1,11 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Button,
-    useDisclosure,
-    Input,
-} from '@nextui-org/react'
+import { Button, useDisclosure } from '@nextui-org/react'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
 import { Issue, ValidationError } from '@/types'
-import MarkdownEditor from '@/components/MarkdownEditor'
+import EditArticleModal from '@/app/article/components/EditArticleModal'
 interface EditArticleProps {
     issue: Issue | null
     number: number
@@ -27,7 +18,6 @@ export default function EditArticle(props: EditArticleProps) {
     const [body, setBody] = useState(issue?.body)
     const [title, setTitle] = useState(issue?.title)
     const [validationError, setValidationError] = useState<ValidationError>({ title: '', body: '' })
-    const [isDisabled, setIsDisabled] = useState(true)
 
     const handleClick = () => {
         onOpen()
@@ -119,46 +109,16 @@ export default function EditArticle(props: EditArticleProps) {
                     />
                 </svg>
             </div>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">編輯文章</ModalHeader>
-                            <ModalBody>
-                                <Input
-                                    key="outside"
-                                    type="email"
-                                    label="標題"
-                                    labelPlacement="outside"
-                                    placeholder={issue?.title}
-                                    value={title}
-                                    onChange={handleTitleChange}
-                                    errorMessage={validationError ? validationError.title : ' '}
-                                />
-                                <div className="text-sm">文章內容</div>
-                                <MarkdownEditor body={body} setBody={setBody} />
-
-                                <div className="text-xs text-danger">
-                                    {validationError ? validationError.body : ' '}
-                                </div>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="default" variant="light" onPress={onClose}>
-                                    取消
-                                </Button>
-                                <Button
-                                    color="primary"
-                                    onPress={onClose}
-                                    onClick={handleEditIssue}
-                                    isDisabled={validationError.title !== '' || validationError.body !== ''}
-                                >
-                                    確定新增
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
+            <EditArticleModal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                title={title || ''}
+                handleTitleChange={handleTitleChange}
+                body={body}
+                setBody={setBody}
+                validationError={validationError}
+                handleEditIssue={handleEditIssue}
+            />
         </>
     )
 }

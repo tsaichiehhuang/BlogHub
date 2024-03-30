@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Error from '@/components/Error'
 import { Issue } from '@/types'
-import { ArticleLoading } from '@/app/article/components/ArticleLoading'
+import ArticleLoading from '@/app/article/components/ArticleLoading'
 import dynamic from 'next/dynamic'
 const Article = dynamic(() => import('@/app/article/components/Article'))
 interface ArticleProps {
@@ -43,17 +43,11 @@ export default function ArticleSquare(props: ArticleProps) {
             fetchAnIssue(number)
         }
     }, [number])
-    console.log('issue', issue)
-    console.log('error', error)
     return (
         <>
-            {issue === undefined || null ? (
-                error ? (
-                    <Error statusCode={statusCode} />
-                ) : (
-                    <ArticleLoading />
-                )
-            ) : (
+            {issue === null && <ArticleLoading />}
+            {issue === undefined && <Error statusCode={statusCode} />}
+            {issue !== undefined && issue !== null && (
                 <Article
                     userAvatar={userAvatar}
                     issue={issue}

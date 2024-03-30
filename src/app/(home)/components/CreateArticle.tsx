@@ -1,22 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Button,
-    useDisclosure,
-    Input,
-    Card,
-} from '@nextui-org/react'
+import { useDisclosure, Input, Card } from '@nextui-org/react'
 import { Octokit } from '@octokit/rest'
 import Cookies from 'js-cookie'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
-import MarkdownEditor from '@/components/MarkdownEditor'
-import { Label, ValidationError } from '@/types'
+import { ValidationError } from '@/types'
+import CreateArticleModal from '@/app/(home)/components/CreateArticleModal'
 
 export default function CreateArticle() {
     const token = Cookies.get('access_token')
@@ -108,20 +98,7 @@ export default function CreateArticle() {
         }
         validateBody()
     }, [body])
-    const labelName = [
-        { name: 'new', color: 'FBCA04' },
-        { name: 'hot', color: 'F9D0C4' },
-        { name: 'practice', color: 'C5DEF5' },
-    ]
-    const handleLabelChoose = (label: Label) => {
-        const newSelectedLabels = [...selectedLabels]
-        if (newSelectedLabels.includes(label.name)) {
-            newSelectedLabels.splice(newSelectedLabels.indexOf(label.name), 1)
-        } else {
-            newSelectedLabels.push(label.name)
-        }
-        setSelectedLabels(newSelectedLabels)
-    }
+
     return (
         <>
             <Card
@@ -134,70 +111,20 @@ export default function CreateArticle() {
                     key="outside"
                     labelPlacement="outside"
                     placeholder="Hey, Daniel！想發表什麼內容呢？"
-                    onChange={handleTitleChange}
                     className="  text-black text-[24px] font-bold"
                     size="lg"
                 />
             </Card>
-            <Modal size="5xl" isOpen={isOpen} onOpenChange={onOpenChange}>
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">新增文章</ModalHeader>
-                            <ModalBody>
-                                <Input
-                                    key="outside"
-                                    label="標題"
-                                    labelPlacement="outside"
-                                    placeholder="輸入標題"
-                                    value={title}
-                                    onChange={handleTitleChange}
-                                    errorMessage={validationError ? validationError.title : ' '}
-                                />
-                                <div className="text-sm">文章內容</div>
-                                <MarkdownEditor body={body} setBody={setBody} />
-
-                                <div className="text-xs text-danger">
-                                    {validationError ? validationError.body : ' '}
-                                </div>
-
-                                <div className="">
-                                    <div className="mb-1 text-sm">選擇標籤</div>
-                                    <div className="flex gap-1">
-                                        {labelName.map((label, index) => (
-                                            <button
-                                                key={index}
-                                                onClick={() => handleLabelChoose(label)}
-                                                style={{
-                                                    backgroundColor: selectedLabels.includes(label.name)
-                                                        ? `#${label.color}`
-                                                        : 'transparent',
-                                                    borderColor: `#${label.color}`,
-                                                }}
-                                                className="px-2 text-sm bg-transparent border-2 rounded-lg "
-                                            >
-                                                {label.name}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="default" variant="light" onPress={onClose}>
-                                    取消
-                                </Button>
-                                <Button
-                                    color="primary"
-                                    onClick={handleCreateIssue}
-                                    isDisabled={validationError.title !== '' || validationError.body !== ''}
-                                >
-                                    確定新增
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
+            <CreateArticleModal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                title={title}
+                handleTitleChange={handleTitleChange}
+                body={body}
+                setBody={setBody}
+                validationError={validationError}
+                handleCreateIssue={handleCreateIssue}
+            />
         </>
     )
 }

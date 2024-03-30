@@ -42,6 +42,9 @@ export default function DeleteArticle(props: DeleteArticleProps) {
             })
             setTimeout(() => {
                 router.push('/')
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
             }, 3000)
         } else {
             Swal.fire({
