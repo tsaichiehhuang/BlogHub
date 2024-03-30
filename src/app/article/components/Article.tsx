@@ -5,12 +5,23 @@ import { Label, Comment } from '@/types'
 import EditArticle from '@/app/article/components/EditArticle'
 import DeleteArticle from '@/app/article/components/DeleteArticle'
 import dynamic from 'next/dynamic'
-const CreateComment = dynamic(() => import('@/app/article/components/CreateComment'))
+import { useState } from 'react'
 
+const CreateComment = dynamic(() => import('@/app/article/components/CreateComment'))
+const DeleteComment = dynamic(() => import('@/app/article/components/DeleteComment'))
 export default function Article(props: any) {
     const { issue, comments, isAuthorLogin, isUserLogin, number, userAvatar } = props
     const createdAtDate = issue ? new Date(issue.created_at) : null
 
+    const [isHovered, setIsHovered] = useState(false)
+
+    const handleMouseEnter = () => {
+        setIsHovered(true)
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false)
+    }
     const formattedCreatedAt = createdAtDate
         ? createdAtDate
               .toLocaleString([], {
@@ -28,10 +39,7 @@ export default function Article(props: any) {
     }
 
     return (
-        <Card
-            shadow="sm"
-            className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-10 p-4 text-left mt-4 max-w-[400px] min-w-[400px]"
-        >
+        <Card shadow="sm" className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-10 p-4 text-left mt-4 w-full  ">
             <CardHeader className="flex flex-col items-start justify-start gap-4">
                 <div className="flex flex-row justify-between w-full">
                     <div className="flex flex-col justify-start gap-2 font-medium text-zinc-700 text-tiny md:gap-2 md:justify-center md:items-center md:flex-row">
@@ -75,21 +83,16 @@ export default function Article(props: any) {
                         <div className="flex flex-row items-end justify-end w-full">
                             <div className="ml-2 font-bold text-zinc-700 text-tiny">{issue?.comments} 則留言</div>
                         </div>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 w-full">
                             {comments &&
                                 comments.map((comment: Comment, index: number) => (
-                                    <div key={index} className="flex flex-row items-start justify-start gap-2">
-                                        <Image
-                                            src={comment.user.avatar_url}
-                                            alt="avatar"
-                                            width={30}
-                                            height={30}
-                                            className="rounded-full"
-                                        />
-                                        <div className="flex flex-col gap-1 p-3 bg-gray-100 rounded-3xl max-w-xl">
-                                            <p className="text-xs font-bold">{comment.user.login}</p>
-                                            {comment.body}
-                                        </div>
+                                    <div
+                                        key={index}
+                                        className="flex flex-row items-start justify-start gap-2 w-full"
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
+                                        <DeleteComment comment={comment} isHovered={isHovered} />
                                     </div>
                                 ))}
                         </div>
@@ -99,7 +102,6 @@ export default function Article(props: any) {
             {(isAuthorLogin || isUserLogin) && (
                 <CardFooter className="flex flex-row items-start justify-start w-full gap-2">
                     <Image src={userAvatar} alt="avatar" width={30} height={30} className="rounded-full" />
-
                     <CreateComment number={number} />
                 </CardFooter>
             )}
