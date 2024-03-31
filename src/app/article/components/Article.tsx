@@ -9,12 +9,15 @@ import { useState } from 'react'
 
 const CreateComment = dynamic(() => import('@/app/article/components/CreateComment'))
 const DeleteComment = dynamic(() => import('@/app/article/components/DeleteComment'))
+const EditComment = dynamic(() => import('@/app/article/components/EditComment'))
+
 export default function Article(props: any) {
     const { issue, comments, isAuthorLogin, isUserLogin, number, userAvatar } = props
     const createdAtDate = issue ? new Date(issue.created_at) : null
 
     const [isHovered, setIsHovered] = useState(false)
-
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    console.log('isModalOpen', isModalOpen)
     const handleMouseEnter = () => {
         setIsHovered(true)
     }
@@ -89,10 +92,32 @@ export default function Article(props: any) {
                                     <div
                                         key={index}
                                         className="flex flex-row items-start justify-start gap-2 w-full"
-                                        onMouseEnter={handleMouseEnter}
-                                        onMouseLeave={handleMouseLeave}
+                                        onMouseEnter={() => !isModalOpen && handleMouseEnter()}
+                                        onMouseLeave={() => !isModalOpen && handleMouseLeave()}
                                     >
-                                        <DeleteComment comment={comment} isHovered={isHovered} />
+                                        <Image
+                                            src={comment.user.avatar_url}
+                                            alt="avatar"
+                                            width={30}
+                                            height={30}
+                                            className="rounded-full"
+                                        />
+                                        <div className="flex flex-col gap-1 p-3 bg-gray-100 rounded-3xl md:max-w-xl max-w-64">
+                                            <p className="text-xs font-bold">{comment.user.login}</p>
+                                            {comment.body}
+                                        </div>
+                                        <DeleteComment
+                                            comment={comment}
+                                            isHovered={isHovered}
+                                            setIsModalOpen={setIsModalOpen}
+                                            setIsHovered={setIsHovered}
+                                        />
+                                        <EditComment
+                                            comment={comment}
+                                            isHovered={isHovered}
+                                            setIsModalOpen={setIsModalOpen}
+                                            setIsHovered={setIsHovered}
+                                        />
                                     </div>
                                 ))}
                         </div>
