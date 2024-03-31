@@ -167,9 +167,3 @@ Thanks to the combination of TailwindCSS and NextUI, our React app can seamlessl
 
 -   Before data loading, utilize placeholders in the form of colored blocks to present the page structure and data positions to the user.
 -   Create an anticipation of content "about to appear" rather than focusing entirely on "waiting time", **optimizing the user experience**!
-
-### ✅ Web Vitals
-
--   This web app has been tested using Lighthouse, and it has received a score of 100/100.
-
-    <img width="311" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/eace4c53-98c6-4c49-a2df-c12a80ffdf02">
