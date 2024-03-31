@@ -88,43 +88,50 @@ This project uses three main packages:
 
 |                                                                                                                                        |                                                                                                                                     |
 | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| <img width="600" alt="home-gif" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/82f57486-2fe8-4c83-8ce7-cd583b74de86"> | <img width="300" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/924c561f-41fe-4175-b7e3-302a56a0c3eb"> |
+| <img width="600" alt="home-gif" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/82f57486-2fe8-4c83-8ce7-cd583b74de86"> | <img width="300" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/8bb72405-8ad7-41c2-a5a3-06b4bcd58d98"> |
 
 -   After logging in, the system will determine whether the user is the author of the post, if yes, the user can create posts.
+
     #### 📌 Create Post
-    <img width="600" alt="發布文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/ef715503-e186-4d0c-b444-65e02d83ae6d">
+
+    <img width="600" alt="發布文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/2f02ea62-02fc-457d-8a43-d34fb107566a">
 
 #### (2) Article
 
 -   show issues details including tilte, blody, labels, create date and comments.
-    <img width="500" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/14ff98c8-77b3-434a-b737-e314e2a78809">
+    <img width="500" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/3c33d65b-6ecd-401f-9c34-d2c85df809ac">
 
 -   After logging in, the system will determine whether the user is the author of the post.
 
-    -   If yes: the user can edit, delete posts, create comments and delete comment.
-    -   If not: the user can only create comments.
+    -   If yes (author): the user can edit, delete posts, create comments and delete comment.
+    -   If not (common user): the user can only create and delete his/her comments.
 
     #### 📌 Edit Post
 
-    <img width="600" alt="編輯文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/24ed002f-2d8c-45bf-a70b-b07f4b6b5c9a">
+    <img width="600" alt="編輯文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/19f93155-3a9f-4871-9248-5d6fc54da95a">
 
     #### 📌 Delete Post
 
-    <img width="600" alt="刪除文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/7252d78d-1da0-46f6-86a9-658d977fefba">
+    <img width="600" alt="刪除文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/ccf1fedb-06f3-4d6b-b48c-7c85a0d59a9e">
 
     #### 📌 Create Comment
 
-    <img width="600" alt="創建留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/13730a99-466e-42ed-8675-c7ee78271171">
+    <img width="600" alt="創建留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/b12df9b9-092d-4fe9-ba9e-ad1f51c4cb97">
+
+    #### 📌 Edit Comment
+
+    <img width="600" alt="編輯留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/d71146d3-ab09-4daa-a255-44a3a9517f65">
 
     #### 📌 Delete Comment
 
-    <img width="600" alt="刪除留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/aafeaeea-cd91-4388-818b-e1058425c15f">
+    <img width="600" alt="刪除留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/5039b746-675e-43b2-917e-cbae88c0cdab">
 
 ### 【Components】
 
 #### (1) [Header](https://github.com/tsaichiehhuang/BlogHub/blob/main/src/components/header/Header.tsx)
 
 -   The header contains a logo that serves as a link to the homepage, as well as a [login](https://github.com/tsaichiehhuang/BlogHub/blob/main/src/components/header/LoginButton.tsx)/logout button.
+-   Show user's name after login
 
 #### (2) [Error](https://github.com/tsaichiehhuang/BlogHub/blob/main/src/components/Error.tsx)
 
@@ -133,6 +140,7 @@ This project uses three main packages:
 #### (3) [IsLogin](https://github.com/tsaichiehhuang/BlogHub/blob/main/src/components/IsLogin.tsx)
 
 -   Check if the user is logged in and display the relevant content (e.g., create article button, edit article button).
+-   Also check if the user is author or common user
 
 ## 3. Learn More
 
@@ -146,7 +154,7 @@ Thanks to the combination of TailwindCSS and NextUI, our React app can seamlessl
 -   Omit the self-introduction image.
 -   Replace the edit/delete buttons for articles with icons.
 
-    <img width="150" alt="image" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/f33d19a5-e97c-4580-b6fb-457a74dc86d6">
+    <img width="150" alt="手機rwd" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/487652ec-1797-4d06-9c8b-d00a5ff69920">
 
 ### ✅ Error Handling
 
