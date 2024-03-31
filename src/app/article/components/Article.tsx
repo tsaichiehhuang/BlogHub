@@ -6,6 +6,7 @@ import EditArticle from '@/app/article/components/EditArticle'
 import DeleteArticle from '@/app/article/components/DeleteArticle'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import Cookies from 'js-cookie'
 
 const CreateComment = dynamic(() => import('@/app/article/components/CreateComment'))
 const DeleteComment = dynamic(() => import('@/app/article/components/DeleteComment'))
@@ -14,17 +15,11 @@ const EditComment = dynamic(() => import('@/app/article/components/EditComment')
 export default function Article(props: any) {
     const { issue, comments, isAuthorLogin, isUserLogin, number, userAvatar } = props
     const createdAtDate = issue ? new Date(issue.created_at) : null
+    const username = Cookies.get('username')
 
-    const [isHovered, setIsHovered] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
-    console.log('isModalOpen', isModalOpen)
-    const handleMouseEnter = () => {
-        setIsHovered(true)
-    }
+    const [hoverComment, setHoverComment] = useState<Comment | null>(null)
 
-    const handleMouseLeave = () => {
-        setIsHovered(false)
-    }
     const formattedCreatedAt = createdAtDate
         ? createdAtDate
               .toLocaleString([], {
@@ -92,8 +87,8 @@ export default function Article(props: any) {
                                     <div
                                         key={index}
                                         className="flex flex-row items-start justify-start gap-2 w-full"
-                                        onMouseEnter={() => !isModalOpen && handleMouseEnter()}
-                                        onMouseLeave={() => !isModalOpen && handleMouseLeave()}
+                                        onMouseEnter={() => !isModalOpen && setHoverComment(comment)}
+                                        onMouseLeave={() => !isModalOpen && setHoverComment(null)}
                                     >
                                         <Image
                                             src={comment.user.avatar_url}
@@ -106,18 +101,20 @@ export default function Article(props: any) {
                                             <p className="text-xs font-bold">{comment.user.login}</p>
                                             {comment.body}
                                         </div>
-                                        <DeleteComment
-                                            comment={comment}
-                                            isHovered={isHovered}
-                                            setIsModalOpen={setIsModalOpen}
-                                            setIsHovered={setIsHovered}
-                                        />
-                                        <EditComment
-                                            comment={comment}
-                                            isHovered={isHovered}
-                                            setIsModalOpen={setIsModalOpen}
-                                            setIsHovered={setIsHovered}
-                                        />
+                                        {comment.user.login === username && comment === hoverComment && (
+                                            <>
+                                                <DeleteComment
+                                                    comment={comment}
+                                                    setIsModalOpen={setIsModalOpen}
+                                                    setHoverComment={setHoverComment}
+                                                />
+                                                <EditComment
+                                                    comment={comment}
+                                                    setIsModalOpen={setIsModalOpen}
+                                                    setHoverComment={setHoverComment}
+                                                />
+                                            </>
+                                        )}
                                     </div>
                                 ))}
                         </div>
