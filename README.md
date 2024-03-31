@@ -27,7 +27,7 @@
 3. [**Learn More**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#learn-more)
     - Responsive Web Design
     - Error Handling
-    - Web Vitals
+    - Skeleton Screen Loading
 
 ## 1. How To Use
 
