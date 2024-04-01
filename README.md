@@ -6,7 +6,7 @@
 
 -   list issues with `Infinite Scroll` from GitHub REST API
 -   read issue's detail (title, content, labels, comments) from GitHub REST API
--   Implement creating, editing, deleting articles and creating, deleting comment using the GitHub REST API
+-   Implement creating, editing, deleting articles and comment using the GitHub REST API
 
 <img width="600" alt="demo" src="https://github.com/tsaichiehhuang/BlogHub/blob/main/public/DEMO.gif">
 
@@ -108,6 +108,7 @@ This project uses three main packages:
     -   If yes (author): the user can edit, delete posts, create comments and delete comment.
     -   If not (common user): the user can only create and delete his/her comments.
 
+    #### Post
     #### 📌 Edit Post
 
     <img width="600" alt="編輯文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/19f93155-3a9f-4871-9248-5d6fc54da95a">
@@ -116,17 +117,21 @@ This project uses three main packages:
 
     <img width="600" alt="刪除文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/ccf1fedb-06f3-4d6b-b48c-7c85a0d59a9e">
 
+    #### Comment
+
+    Implement Optimistic UI updates to immediately display comments after creating, editing, or deleting them.
+       
     #### 📌 Create Comment
 
-    <img width="600" alt="創建留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/b12df9b9-092d-4fe9-ba9e-ad1f51c4cb97">
+    <img width="600" alt="創建留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/d6128dff-8769-4257-a475-fb6b49ee278b">
 
     #### 📌 Edit Comment
 
-    <img width="600" alt="編輯留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/d71146d3-ab09-4daa-a255-44a3a9517f65">
+    <img width="600" alt="編輯留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/0cd7c0e7-9364-4688-a676-bebd61552512">
 
     #### 📌 Delete Comment
 
-    <img width="600" alt="刪除留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/5039b746-675e-43b2-917e-cbae88c0cdab">
+    <img width="600" alt="刪除留言" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/2caebe3b-dd40-4253-995a-f95a62ea9d71">
 
 ### 【Components】
 
