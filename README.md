@@ -108,7 +108,7 @@ This project uses three main packages:
     -   If yes (author): the user can edit, delete posts, create comments and delete comment.
     -   If not (common user): the user can only create and delete his/her comments.
 
-    #### Post
+    ### Post
     #### 📌 Edit Post
 
     <img width="600" alt="編輯文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/19f93155-3a9f-4871-9248-5d6fc54da95a">
@@ -117,9 +117,9 @@ This project uses three main packages:
 
     <img width="600" alt="刪除文章" src="https://github.com/tsaichiehhuang/BlogHub/assets/112929952/ccf1fedb-06f3-4d6b-b48c-7c85a0d59a9e">
 
-    #### Comment
+    ### Comment
 
-    Implement Optimistic UI updates to immediately display comments after creating, editing, or deleting them.
+    Implement **Optimistic UI updates** to immediately display comments after creating, editing, or deleting them.
        
     #### 📌 Create Comment
 
