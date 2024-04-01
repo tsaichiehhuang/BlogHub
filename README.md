@@ -8,7 +8,7 @@
 -   read issue's detail (title, content, labels, comments) from GitHub REST API
 -   Implement creating, editing, deleting articles and creating, deleting comment using the GitHub REST API
 
-<img width="600" alt="home-gif" src="/DEMO.gif">
+<img width="600" alt="demo" src="https://github.com/tsaichiehhuang/BlogHub/blob/main/public/DEMO.gif">
 
 ## Overview
 
@@ -27,7 +27,7 @@
 3. [**Learn More**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#learn-more)
     - Responsive Web Design
     - Error Handling
-    - Web Vitals
+    - Skeleton Screen Loading
 
 ## 1. How To Use
 
