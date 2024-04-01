@@ -1,8 +1,10 @@
 import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Button } from '@nextui-org/react'
+import { Comment } from '@/types'
+
 export default function DeleteComment(props: any) {
-    const { comment, setIsModalOpen, setHoverComment } = props
+    const { comment, setIsModalOpen, setHoverComment, setComments, setCommentCount } = props
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
     const token = Cookies.get('access_token')
@@ -12,6 +14,7 @@ export default function DeleteComment(props: any) {
     }
     const handleDeleteComment = async (commentId: number) => {
         onOpenChange()
+        setIsModalOpen(false)
 
         const owner = 'tsaichiehhuang'
         const repo = 'TestBlog'
@@ -26,15 +29,16 @@ export default function DeleteComment(props: any) {
             })
 
             if (res.status === 204) {
-                Swal.fire({
-                    icon: 'success',
-                    title: '留言刪除成功',
-                    confirmButtonText: '確定',
-                    timer: 3000,
+                setComments((prevComments: any) => {
+                    const index = prevComments.findIndex((c: Comment) => c.id === comment.id)
+                    if (index !== -1) {
+                        const updatedComments = [...prevComments]
+                        updatedComments.splice(index, 1)
+                        return updatedComments
+                    }
+                    return prevComments
                 })
-                setTimeout(() => {
-                    window.location.reload()
-                }, 3000)
+                setCommentCount((prevCount: number) => prevCount - 1)
             } else {
                 Swal.fire({
                     icon: 'error',
