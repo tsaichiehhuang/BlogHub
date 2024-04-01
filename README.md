@@ -4,18 +4,18 @@
 
 ⭐ 3 main functions:
 
--   list issues with `Infinite Scroll` from GitHub REST API
--   read issue's detail (title, content, labels, comments) from GitHub REST API
--   Implement creating, editing, deleting articles and comment using the GitHub REST API
+-   List issues with `Infinite Scroll` from GitHub REST API
+-   Show details of an issue (including title, content, labels, and comments) from the GitHub REST API.
+-   Implement article and comment creation, editing, and deletion using the GitHub REST API
 
 <img width="600" alt="demo" src="https://github.com/tsaichiehhuang/BlogHub/blob/main/public/DEMO.gif">
 
 ## Overview
 
-1. [**How To Use**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#how-to-use)
+1. [**How To Use**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#1-how-to-use)
     - On GitHub Page
     - On Your Computer
-2. [**Project Architecture**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#project-architecture)
+2. [**Project Architecture**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#2-project-architecture)
     - Packages
     - Pages
         - Home
@@ -24,7 +24,7 @@
         - Header
         - Error
         - IsLogin
-3. [**Learn More**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#learn-more)
+3. [**Learn More**](https://github.com/tsaichiehhuang/BlogHub?tab=readme-ov-file#3-learn-more)
     - Responsive Web Design
     - Error Handling
     - Skeleton Screen Loading
@@ -105,8 +105,8 @@ This project uses three main packages:
 
 -   After logging in, the system will determine whether the user is the author of the post.
 
-    -   If yes (author): the user can edit, delete posts, create comments and delete comment.
-    -   If not (common user): the user can only create and delete his/her comments.
+    - If yes (author): The user has the ability to create, edit, and delete both articles and comments.
+    - If not (common user): Users are only able to create, edit, or delete their own comments.
 
     ### Post
     #### 📌 Edit Post
