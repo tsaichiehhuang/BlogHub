@@ -61,7 +61,7 @@ export default function CreateComment(props: CreateCommentProps) {
                         user: { login: Cookies.get('username') || '', avatar_url: userAvatar },
                     },
                 ])
-                setCommentCount((prevCount: number) => prevCount - 1)
+                setCommentCount((prevCount: number) => prevCount + 1)
             } else {
                 Swal.fire({
                     icon: 'error',
