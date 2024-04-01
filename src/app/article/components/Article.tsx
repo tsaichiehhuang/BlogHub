@@ -13,13 +13,13 @@ const DeleteComment = dynamic(() => import('@/app/article/components/DeleteComme
 const EditComment = dynamic(() => import('@/app/article/components/EditComment'))
 
 export default function Article(props: any) {
-    const { issue, comments, isAuthorLogin, isUserLogin, number, userAvatar } = props
+    const { issue, comments: comments_API, isAuthorLogin, isUserLogin, number, userAvatar } = props
     const createdAtDate = issue ? new Date(issue.created_at) : null
     const username = Cookies.get('username')
-
+    const [commentCount, setCommentCount] = useState<number>(issue.comments)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [hoverComment, setHoverComment] = useState<Comment | null>(null)
-
+    const [comments, setComments] = useState<Comment[]>(comments_API)
     const formattedCreatedAt = createdAtDate
         ? createdAtDate
               .toLocaleString([], {
@@ -35,7 +35,6 @@ export default function Article(props: any) {
         const result = remark().use(html).processSync(markdownContent)
         return result.toString()
     }
-
     return (
         <Card shadow="sm" className="md:min-w-[960px] md:max-w-[960px] gap-4  md:p-10 p-4 text-left mt-4 w-full  ">
             <CardHeader className="flex flex-col items-start justify-start gap-4">
@@ -79,7 +78,7 @@ export default function Article(props: any) {
                     <Divider />
                     <CardFooter className="flex flex-col items-start justify-start">
                         <div className="flex flex-row items-end justify-end w-full">
-                            <div className="ml-2 font-bold text-zinc-700 text-tiny">{issue?.comments} 則留言</div>
+                            <div className="ml-2 font-bold text-zinc-700 text-tiny">{commentCount} 則留言</div>
                         </div>
                         <div className="flex flex-col gap-2 w-full">
                             {comments &&
@@ -107,11 +106,15 @@ export default function Article(props: any) {
                                                     comment={comment}
                                                     setIsModalOpen={setIsModalOpen}
                                                     setHoverComment={setHoverComment}
+                                                    setComments={setComments}
+                                                    setCommentCount={setCommentCount}
                                                 />
                                                 <EditComment
                                                     comment={comment}
                                                     setIsModalOpen={setIsModalOpen}
                                                     setHoverComment={setHoverComment}
+                                                    setComments={setComments}
+                                                    userAvatar={userAvatar}
                                                 />
                                             </>
                                         )}
@@ -124,7 +127,12 @@ export default function Article(props: any) {
             {(isAuthorLogin || isUserLogin) && (
                 <CardFooter className="flex flex-row items-start justify-start w-full gap-2">
                     <Image src={userAvatar} alt="avatar" width={30} height={30} className="rounded-full" />
-                    <CreateComment number={number} />
+                    <CreateComment
+                        number={number}
+                        setComments={setComments}
+                        userAvatar={userAvatar}
+                        setCommentCount={setCommentCount}
+                    />
                 </CardFooter>
             )}
         </Card>

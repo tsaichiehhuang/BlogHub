@@ -16,9 +16,14 @@ import Cookies from 'js-cookie'
 import Swal from 'sweetalert2'
 import * as Yup from 'yup'
 import { ValidationError } from '@/types'
-
-export default function CreateComment(props: any) {
-    const { number } = props
+interface CreateCommentProps {
+    number: number
+    setComments: React.Dispatch<React.SetStateAction<any[]>>
+    userAvatar: string
+    setCommentCount: React.Dispatch<React.SetStateAction<number>>
+}
+export default function CreateComment(props: CreateCommentProps) {
+    const { number, setComments, userAvatar, setCommentCount } = props
     const token = Cookies.get('access_token')
     const octokit = new Octokit({
         auth: `${token}`,
@@ -31,6 +36,7 @@ export default function CreateComment(props: any) {
         setComment(e.target.value)
     }
     const handleCreateComment = async () => {
+        onOpenChange()
         try {
             const validationSchema = Yup.object().shape({
                 comment: Yup.string().required('留言不能為空'),
@@ -47,15 +53,15 @@ export default function CreateComment(props: any) {
             })
 
             if (res.status === 201) {
-                Swal.fire({
-                    icon: 'success',
-                    title: '留言發表成功',
-                    confirmButtonText: '確定',
-                    timer: 3000,
-                })
-                setTimeout(() => {
-                    window.location.reload()
-                }, 3000)
+                setComments((prevComments: any) => [
+                    ...prevComments,
+                    {
+                        id: res.data.id,
+                        body: comment,
+                        user: { login: Cookies.get('username') || '', avatar_url: userAvatar },
+                    },
+                ])
+                setCommentCount((prevCount: number) => prevCount - 1)
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -66,7 +72,6 @@ export default function CreateComment(props: any) {
             }
         } catch (error: any) {
             setValidationError(error.message)
-
             console.error('Error creating issue:', error)
         }
     }

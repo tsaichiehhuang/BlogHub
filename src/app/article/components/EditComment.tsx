@@ -13,10 +13,11 @@ import {
 import { useState, useEffect } from 'react'
 import { ValidationError } from '@/types'
 import * as Yup from 'yup'
+import { Comment } from '@/types'
 
 export default function EditComment(props: any) {
     const token = Cookies.get('access_token')
-    const { comment, setIsModalOpen, setHoverComment } = props
+    const { comment, setIsModalOpen, setHoverComment, setComments, userAvatar } = props
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const [body, setBody] = useState(comment.body)
     const [validationError, setValidationError] = useState<ValidationError>({ comment: '' })
@@ -49,15 +50,19 @@ export default function EditComment(props: any) {
             })
 
             if (res.status === 200) {
-                Swal.fire({
-                    icon: 'success',
-                    title: '留言編輯成功',
-                    confirmButtonText: '確定',
-                    timer: 3000,
+                setComments((prevComments: any) => {
+                    const index = prevComments.findIndex((c: Comment) => c.id === comment.id)
+                    if (index !== -1) {
+                        const updatedComments = [...prevComments]
+                        updatedComments[index] = {
+                            id: commentId,
+                            body: body,
+                            user: { login: Cookies.get('username') || '', avatar_url: userAvatar },
+                        }
+                        return updatedComments
+                    }
+                    return prevComments
                 })
-                setTimeout(() => {
-                    window.location.reload()
-                }, 3000)
             } else {
                 Swal.fire({
                     icon: 'error',
